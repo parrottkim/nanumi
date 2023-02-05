@@ -4,14 +4,15 @@ part 'organization.g.dart';
 
 @JsonSerializable()
 class Organization {
-  final String area, domain, name, representative, website;
+  final String name, representative, website;
+  final List<String> area, domain;
 
   Organization({
-    required this.area,
-    required this.domain,
     required this.name,
     required this.representative,
     required this.website,
+    required this.area,
+    required this.domain,
   });
 
   factory Organization.fromJson(Map<String, dynamic> json) =>

@@ -17,6 +17,8 @@ dependencies:
   firebase_core: ^2.4.1
   json_serializable: ^6.6.1
   cloud_firestore: ^4.3.1
+  shared_preferences: ^2.0.17
+  font_awesome_flutter: ^10.3.0
 
 dev_dependencies:
   flutter_test:
@@ -30,3 +32,48 @@ flutter:
 
   assets:
     - assets/
+    - assets/fonts/
+    - assets/images/
+
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard/Pretendard-Black.otf
+          weight: 900
+        - asset: assets/fonts/Pretendard/Pretendard-ExtraBold.otf
+          weight: 800
+        - asset: assets/fonts/Pretendard/Pretendard-Bold.otf
+          weight: 700
+        - asset: assets/fonts/Pretendard/Pretendard-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Pretendard/Pretendard-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Pretendard/Pretendard-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Pretendard/Pretendard-Light.otf
+          weight: 300
+        - asset: assets/fonts/Pretendard/Pretendard-ExtraLight.otf
+          weight: 200
+        - asset: assets/fonts/Pretendard/Pretendard-Thin.otf
+          weight: 100
+
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway/Raleway-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Raleway/Raleway-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Raleway/Raleway-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Raleway/Raleway-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Raleway/Raleway-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Raleway/Raleway-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Raleway/Raleway-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Raleway/Raleway-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Raleway/Raleway-Thin.ttf
+          weight: 100

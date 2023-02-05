@@ -7,18 +7,19 @@ part of 'organization.dart';
 // **************************************************************************
 
 Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
-      area: json['area'] as String,
-      domain: json['domain'] as String,
       name: json['name'] as String,
       representative: json['representative'] as String,
       website: json['website'] as String,
+      area: (json['area'] as List<dynamic>).map((e) => e as String).toList(),
+      domain:
+          (json['domain'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
     <String, dynamic>{
-      'area': instance.area,
-      'domain': instance.domain,
       'name': instance.name,
       'representative': instance.representative,
       'website': instance.website,
+      'area': instance.area,
+      'domain': instance.domain,
     };
