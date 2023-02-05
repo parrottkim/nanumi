@@ -1,22 +1,11 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:csv/csv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nanumi/models/organization.dart';
+import 'package:nanumi/repositories/firebase_repository.dart';
 
-final listProvider =
-    StateNotifierProvider<ListNotifier, List<dynamic>>((ref) => ListNotifier());
-
-class ListNotifier extends StateNotifier<List<dynamic>> {
-  ListNotifier() : super([]) {
-    _fetchList();
-  }
-
-  _fetchList() async {
-    final file = File('assets/nanumi.csv').openRead();
-    state = await file
-        .transform(utf8.decoder)
-        .transform(new CsvToListConverter())
-        .toList();
-  }
-}
+final allOrganizationProvider =
+    StreamProvider.autoDispose<List<Organization>>((ref) {
+  var stream = FirebaseRepository().allOrganizations;
+  return stream.map((snapshot) => snapshot.docs
+      .map<Organization>((doc) => Organization.fromJson(doc.data()))
+      .toList());
+});
