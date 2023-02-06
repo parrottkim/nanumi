@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nanumi/pages/home/controller/home_controller.dart';
-import 'package:nanumi/pages/home/widgets/home_list.dart';
+import 'package:nanumi/pages/home/widgets/home_tabbar_view.dart';
 import 'package:nanumi/pages/home/widgets/home_tabbar.dart';
 import 'package:nanumi/widgets/dashboard_appbar.dart';
 import 'package:nanumi/widgets/logo.dart';
+import 'package:unicons/unicons.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -38,7 +37,6 @@ class _HomePageState extends ConsumerState<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    final stream = ref.watch(allOrganizationProvider);
     return Scaffold(
       appBar: DashboardAppBar(
         title: Logo(),
@@ -48,25 +46,18 @@ class _HomePageState extends ConsumerState<HomePage>
             customBorder: CircleBorder(),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Icon(FontAwesomeIcons.magnifyingGlass),
+              child: Icon(UniconsLine.cog),
             ),
           ),
-          SizedBox(width: 4.0),
         ],
         bottom: HomeTabBar(
           tabController: _tabController,
           pageController: _pageController,
         ),
       ),
-      body: Center(
-        child: stream.when(
-          data: (data) => HomeList(organizations: data),
-          error: (error, stackTrace) {
-            print(error);
-            return Icon(Icons.error);
-          },
-          loading: () => CircularProgressIndicator(),
-        ),
+      body: HomeTabBarView(
+        tabController: _tabController,
+        pageController: _pageController,
       ),
     );
   }

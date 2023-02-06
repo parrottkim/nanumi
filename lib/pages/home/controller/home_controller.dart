@@ -1,11 +1,21 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nanumi/models/organization.dart';
-import 'package:nanumi/repositories/firebase_repository.dart';
+import 'package:nanumi/pages/comment/comment_page.dart';
+import 'package:nanumi/pages/list/list_page.dart';
+import 'package:nanumi/pages/search/search_page.dart';
 
-final allOrganizationProvider =
-    StreamProvider.autoDispose<List<Organization>>((ref) {
-  var stream = FirebaseRepository().allOrganizations;
-  return stream.map((snapshot) => snapshot.docs
-      .map<Organization>((doc) => Organization.fromJson(doc.data()))
-      .toList());
-});
+final tabBarProvider =
+    StateNotifierProvider<TabBarNotifier, int>((ref) => TabBarNotifier());
+
+class TabBarNotifier extends StateNotifier<int> {
+  TabBarNotifier() : super(0);
+
+  final List<Widget> _pages = [
+    ListPage(),
+    CommentPage(),
+    SearchPage(),
+  ];
+  List<Widget> get pages => _pages;
+
+  set value(int index) => state = index;
+}

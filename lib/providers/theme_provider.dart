@@ -14,8 +14,8 @@ ThemeData lightTheme = ThemeData(
     backgroundColor: Colors.white,
   ).copyWith(
     primary: Colors.black,
-    secondary: Color(0xFF0795FE),
-    onSecondary: Color(0xFF3E4D6C),
+    secondary: Color(0xFF669F85),
+    onSecondary: Color(0xFF3B4E52),
     tertiary: Colors.white,
   ),
   // textTheme: TextTheme(
@@ -48,6 +48,9 @@ ThemeData lightTheme = ThemeData(
   appBarTheme: AppBarTheme(
     elevation: 0.0,
     backgroundColor: Colors.transparent,
+    iconTheme: IconThemeData(
+      color: Color(0xFF3B4E52),
+    ),
   ),
   buttonTheme: ButtonThemeData(
     buttonColor: Colors.teal,
@@ -64,6 +67,9 @@ ThemeData lightTheme = ThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all(Colors.teal),
     ),
+  ),
+  iconTheme: IconThemeData(
+    color: Color(0xFF3B4E52),
   ),
   listTileTheme: ListTileThemeData(
     textColor: Colors.grey[850],
@@ -84,9 +90,16 @@ ThemeData darkTheme = ThemeData(
     backgroundColor: Colors.white,
   ).copyWith(
     primary: Colors.white,
-    secondary: Color(0xFF0795FE),
-    onSecondary: Color(0xFF3E4D6C),
+    secondary: Color(0xFF669F85),
+    onSecondary: Color(0xFF3B4E52),
     tertiary: Colors.black,
+  ),
+  appBarTheme: AppBarTheme(
+    elevation: 0.0,
+    backgroundColor: Colors.transparent,
+    iconTheme: IconThemeData(
+      color: Color(0xFF3B4E52),
+    ),
   ),
   textTheme: TextTheme().apply(
     bodyColor: Colors.white60,
@@ -100,6 +113,9 @@ ThemeData darkTheme = ThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all(Colors.teal),
     ),
+  ),
+  iconTheme: IconThemeData(
+    color: Color(0xFF3B4E52),
   ),
   listTileTheme: ListTileThemeData(
     textColor: Colors.white60,

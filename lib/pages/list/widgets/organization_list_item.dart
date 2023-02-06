@@ -1,13 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nanumi/models/organization.dart';
-import 'package:nanumi/pages/home/widgets/area_section.dart';
-import 'package:nanumi/pages/home/widgets/domain_section.dart';
+import 'package:nanumi/pages/list/widgets/area_section.dart';
+import 'package:nanumi/pages/list/widgets/domain_section.dart';
+import 'package:unicons/unicons.dart';
 
-class HomeListItem extends StatelessWidget {
-  const HomeListItem({
+class OrganizationListItem extends StatelessWidget {
+  const OrganizationListItem({
     Key? key,
     required this.organization,
   }) : super(key: key);
@@ -46,7 +46,7 @@ class HomeListItem extends StatelessWidget {
               Row(
                 children: [
                   Icon(
-                    FontAwesomeIcons.thumbsUp,
+                    UniconsLine.thumbs_up,
                     size: 16.0,
                   ),
                   SizedBox(width: 4.0),

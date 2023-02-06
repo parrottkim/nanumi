@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nanumi/pages/home/controller/home_controller.dart';
 
 class HomeTabBar extends ConsumerStatefulWidget implements PreferredSizeWidget {
   const HomeTabBar({
@@ -21,8 +22,15 @@ class HomeTabBar extends ConsumerStatefulWidget implements PreferredSizeWidget {
 class _HomeTabBarState extends ConsumerState<HomeTabBar> {
   @override
   Widget build(BuildContext context) {
+    final notifier = ref.watch(tabBarProvider.notifier);
+
     return TabBar(
       controller: widget.tabController,
+      onTap: (value) {
+        notifier.value = value;
+        widget.pageController.animateToPage(value,
+            duration: Duration(milliseconds: 200), curve: Curves.ease);
+      },
       labelStyle: TextStyle(
         fontWeight: FontWeight.w700,
         fontSize: 16.0,
@@ -36,12 +44,12 @@ class _HomeTabBarState extends ConsumerState<HomeTabBar> {
           width: 2,
           color: Theme.of(context).colorScheme.secondary,
         ),
-        insets: EdgeInsets.symmetric(horizontal: 50.0),
+        insets: EdgeInsets.symmetric(horizontal: 44.0),
       ),
       tabs: [
-        Tab(text: '전체'),
-        Tab(text: '지역'),
-        Tab(text: '사업'),
+        Tab(text: '목록'),
+        Tab(text: '코멘트'),
+        Tab(text: '찾아보기'),
       ],
     );
   }

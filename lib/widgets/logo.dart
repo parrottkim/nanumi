@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Logo extends StatelessWidget {
   const Logo({Key? key}) : super(key: key);
@@ -17,8 +18,8 @@ class Logo extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(
-            'assets/images/logo_colored.png',
+          SvgPicture.asset(
+            'assets/icons/logo_colored.svg',
             width: 24.0,
             height: 24.0,
             fit: BoxFit.cover,

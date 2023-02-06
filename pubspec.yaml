@@ -18,7 +18,12 @@ dependencies:
   json_serializable: ^6.6.1
   cloud_firestore: ^4.3.1
   shared_preferences: ^2.0.17
-  font_awesome_flutter: ^10.3.0
+  flutter_svg: ^1.1.6
+  unicons: ^2.1.0
+  flutter_spinkit: ^5.1.0
+  custom_refresh_indicator: ^2.0.1
+  pull_to_refresh: ^2.0.0
+  google_mobile_ads: ^2.3.0
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +38,7 @@ flutter:
   assets:
     - assets/
     - assets/fonts/
+    - assets/icons/
     - assets/images/
 
   fonts:
