@@ -30,17 +30,16 @@ class ListNotifier extends StateNotifier<List<Organization>> {
   final Ref ref;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  bool _isLoading = false;
-  var documents;
-  var _lastDocuments;
+  late QuerySnapshot<Map<String, dynamic>> documents;
+  late QueryDocumentSnapshot<Map<String, dynamic>> _lastDocuments;
 
-  Future<void> fetchFirestoreData() async {
-    print('load');
+  bool _isLoading = false;
+
+  fetchFirestoreData() async {
     if (_isLoading) return;
     _isLoading = true;
 
-    ref.watch(allCountProvider);
-
+    print('load');
     if (state.isEmpty) {
       documents = await _firestore.collection('organizations').limit(10).get();
     } else {
@@ -50,12 +49,20 @@ class ListNotifier extends StateNotifier<List<Organization>> {
           .limit(10)
           .get();
     }
-    state = [
-      ...state,
-      ...documents.docs.map<Organization>(
-          (element) => Organization.fromJson(element.data())),
-    ];
     _lastDocuments = documents.docs.last;
     _isLoading = false;
+
+    if (mounted) {
+      return state = [
+        ...state,
+        ...documents.docs.map<Organization>(
+            (element) => Organization.fromJson(element.data())),
+      ];
+    }
+  }
+
+  refresh() async {
+    state.clear();
+    await fetchFirestoreData();
   }
 }

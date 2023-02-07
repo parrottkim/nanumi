@@ -59,14 +59,7 @@ class OrganizationListItem extends StatelessWidget {
           DomainSection(
             organization: organization,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
-            child: Container(
-              width: double.infinity,
-              height: 1.0,
-              color: Colors.grey[100],
-            ),
-          ),
+          SizedBox(height: 16.0),
           AreaSection(
             organization: organization,
           ),
