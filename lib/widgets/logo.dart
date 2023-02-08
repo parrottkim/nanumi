@@ -11,7 +11,7 @@ class Logo extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100.0),
         border: Border.all(
-          color: Theme.of(context).colorScheme.onSecondary,
+          color: Theme.of(context).colorScheme.outline,
           width: 2.0,
         ),
       ),
@@ -30,7 +30,7 @@ class Logo extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'Raleway',
               fontWeight: FontWeight.w600,
-              color: Theme.of(context).colorScheme.onSecondary,
+              color: Theme.of(context).colorScheme.outline,
             ),
           ),
         ],

@@ -13,6 +13,7 @@ Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
       area: (json['area'] as List<dynamic>).map((e) => e as String).toList(),
       domain:
           (json['domain'] as List<dynamic>).map((e) => e as String).toList(),
+      likes: json['likes'] as int,
     );
 
 Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
       'website': instance.website,
       'area': instance.area,
       'domain': instance.domain,
+      'likes': instance.likes,
     };

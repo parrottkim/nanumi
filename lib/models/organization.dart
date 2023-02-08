@@ -6,6 +6,7 @@ part 'organization.g.dart';
 class Organization {
   final String name, representative, website;
   final List<String> area, domain;
+  final int likes;
 
   Organization({
     required this.name,
@@ -13,6 +14,7 @@ class Organization {
     required this.website,
     required this.area,
     required this.domain,
+    required this.likes,
   });
 
   factory Organization.fromJson(Map<String, dynamic> json) =>

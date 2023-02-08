@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nanumi/pages/home/controller/home_controller.dart';
+import 'package:nanumi/pages/dashboard/controller/dashboard_controller.dart';
 import 'package:nanumi/widgets/banner_advertise.dart';
 
-class HomeTabBarView extends ConsumerWidget {
-  const HomeTabBarView({
+class DashboardTabBarView extends ConsumerWidget {
+  const DashboardTabBarView({
     Key? key,
     required this.tabController,
     required this.pageController,

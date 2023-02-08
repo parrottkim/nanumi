@@ -21,7 +21,7 @@ class AreaSection extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
-            color: Theme.of(context).colorScheme.onSecondary,
+            color: Theme.of(context).colorScheme.primary,
           ),
           child: Text(
             organization.area[index],

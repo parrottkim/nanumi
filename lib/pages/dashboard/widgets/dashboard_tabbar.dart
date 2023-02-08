@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nanumi/pages/home/controller/home_controller.dart';
+import 'package:nanumi/pages/dashboard/controller/dashboard_controller.dart';
 
-class HomeTabBar extends ConsumerStatefulWidget implements PreferredSizeWidget {
-  const HomeTabBar({
+class DashboardTabBar extends ConsumerStatefulWidget
+    implements PreferredSizeWidget {
+  const DashboardTabBar({
     super.key,
     required this.tabController,
     required this.pageController,
@@ -16,10 +17,11 @@ class HomeTabBar extends ConsumerStatefulWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(44.0);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _HomeTabBarState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _DashboardTabBarState();
 }
 
-class _HomeTabBarState extends ConsumerState<HomeTabBar> {
+class _DashboardTabBarState extends ConsumerState<DashboardTabBar> {
   @override
   Widget build(BuildContext context) {
     final notifier = ref.watch(tabBarProvider.notifier);
@@ -42,15 +44,11 @@ class _HomeTabBarState extends ConsumerState<HomeTabBar> {
       indicator: UnderlineTabIndicator(
         borderSide: BorderSide(
           width: 2,
-          color: Theme.of(context).colorScheme.secondary,
+          color: Theme.of(context).colorScheme.outline,
         ),
         insets: EdgeInsets.symmetric(horizontal: 44.0),
       ),
-      tabs: [
-        Tab(text: '목록'),
-        Tab(text: '코멘트'),
-        Tab(text: '찾아보기'),
-      ],
+      tabs: notifier.tabs,
     );
   }
 }

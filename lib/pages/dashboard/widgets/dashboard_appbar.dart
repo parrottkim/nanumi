@@ -13,6 +13,7 @@ class _PreferredAppBarSize extends Size {
 class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   DashboardAppBar({
     Key? key,
+    this.centerTitle = false,
     this.title,
     this.leading,
     this.action,
@@ -23,6 +24,7 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   }) : preferredSize =
             _PreferredAppBarSize(toolbarHeight, bottom?.preferredSize.height);
 
+  final bool? centerTitle;
   final Widget? title;
   final Widget? leading;
   final List<Widget>? action;
@@ -37,10 +39,7 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 0.0,
-      backgroundColor: backgroundColor,
-      foregroundColor: Colors.black,
-      centerTitle: false,
+      centerTitle: centerTitle,
       automaticallyImplyLeading: false,
       leading: leading,
       title: title,

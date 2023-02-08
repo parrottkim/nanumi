@@ -9,7 +9,7 @@ class DefaultProgressIndicator extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: SpinKitThreeBounce(
-        color: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.primary,
         size: 16.0,
       ),
     );
