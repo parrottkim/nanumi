@@ -18,6 +18,7 @@ ThemeData lightTheme = ThemeData(
   ).copyWith(
     primary: Color(0xFF669F85),
     secondary: Color(0xFFE5E7E8),
+    tertiary: Color(0xFF556F63),
     outline: Color(0xFF3B4E52),
   ),
   textTheme: TextTheme(
@@ -55,46 +56,6 @@ ThemeData lightTheme = ThemeData(
   iconTheme: IconThemeData(
     color: Color(0xFF3B4E52),
   ),
-  // inputDecorationTheme: InputDecorationTheme(
-  //   alignLabelWithHint: true,
-  //   labelStyle: const TextStyle(
-  //     fontSize: 14.0,
-  //     fontWeight: FontWeight.w500,
-  //   ),
-  //   floatingLabelBehavior: FloatingLabelBehavior.never,
-  //   fillColor: Colors.white,
-  //   filled: false,
-  //   contentPadding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
-  //   errorStyle: const TextStyle(
-  //     fontSize: 14.0,
-  //     fontWeight: FontWeight.w500,
-  //     color: Colors.red,
-  //   ),
-  //   border: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(8.0),
-  //   ),
-  //   enabledBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(8.0),
-  //     borderSide: const BorderSide(
-  //       color: Color(0xFF3B4E52),
-  //       width: 2.0,
-  //     ),
-  //   ),
-  //   focusedBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(8.0),
-  //     borderSide: const BorderSide(
-  //       color: Color(0xFF3B4E52),
-  //       width: 2.0,
-  //     ),
-  //   ),
-  //   disabledBorder: OutlineInputBorder(
-  //     borderRadius: BorderRadius.circular(8.0),
-  //     borderSide: const BorderSide(
-  //       color: Color(0xFF3B4E52),
-  //       width: 2.0,
-  //     ),
-  //   ),
-  // ),
 );
 
 ThemeData darkTheme = ThemeData(
@@ -113,6 +74,7 @@ ThemeData darkTheme = ThemeData(
   ).copyWith(
     primary: Color(0xFF669F85),
     secondary: Color(0xFFE5E7E8),
+    tertiary: Color(0xFF556F63),
     outline: Color(0xFFE5E7E8),
   ),
   textTheme: TextTheme(

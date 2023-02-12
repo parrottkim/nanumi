@@ -21,7 +21,7 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leading,
     this.action,
     this.bottom,
-    this.backgroundColor = Colors.white,
+    this.backgroundColor,
     this.brightness = Brightness.light,
     this.toolbarHeight = 56.0,
   }) : preferredSize =
@@ -33,7 +33,7 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final List<Widget>? action;
   final PreferredSizeWidget? bottom;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final Brightness brightness;
   final double toolbarHeight;
 
@@ -44,7 +44,8 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: elevation,
-      backgroundColor: backgroundColor,
+      backgroundColor:
+          backgroundColor ?? Theme.of(context).appBarTheme.backgroundColor,
       centerTitle: centerTitle,
       automaticallyImplyLeading: false,
       title: Row(

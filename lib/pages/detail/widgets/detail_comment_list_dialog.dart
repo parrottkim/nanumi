@@ -32,19 +32,12 @@ class DetailCommentListDialog extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Icon(UniconsLine.comment_alt_message),
-                SizedBox(width: 8.0),
-                Text(
-                  '의견 보기',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16.0,
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
-                ),
-              ],
+            Text(
+              '의견 보기',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 16.0,
+              ),
             ),
             SizedBox(height: 12.0),
             Expanded(

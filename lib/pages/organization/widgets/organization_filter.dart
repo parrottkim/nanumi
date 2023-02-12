@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/pages/organization/controller/list_controller.dart';
+import 'package:nanumi/providers/theme_provider.dart';
 
 class OrganizationFilter extends ConsumerWidget {
   const OrganizationFilter({super.key});
@@ -32,10 +33,10 @@ class OrganizationFilter extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(20.0),
                     border: Border.all(
                       width: 2.0,
-                      color: Theme.of(context).colorScheme.outline,
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
                     color: state == index
-                        ? Theme.of(context).colorScheme.outline
+                        ? Theme.of(context).colorScheme.tertiary
                         : Colors.transparent,
                   ),
                   child: Text(
@@ -43,8 +44,11 @@ class OrganizationFilter extends ConsumerWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: state == index
-                          ? Colors.white
-                          : Theme.of(context).colorScheme.outline,
+                          ? Theme.of(context).colorScheme.tertiary ==
+                                  Color(0xFF556F63)
+                              ? Colors.white
+                              : Colors.black
+                          : Theme.of(context).colorScheme.tertiary,
                     ),
                   ),
                 ),
