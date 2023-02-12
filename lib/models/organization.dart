@@ -19,8 +19,8 @@ class Organization {
     this.image,
   });
 
-  factory Organization.fromFire(QueryDocumentSnapshot<Map> doc) =>
-      _$OrganizationFromFire(doc);
+  factory Organization.fromFirestore(QueryDocumentSnapshot<Map> doc) =>
+      _$OrganizationFromFirestore(doc);
 
   // factory Organization.fromJson(Map<String, dynamic> json) =>
   //     _$OrganizationFromJson(json);

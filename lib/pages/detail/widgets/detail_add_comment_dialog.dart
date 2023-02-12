@@ -77,36 +77,40 @@ class _DetailAddCommentDialogState
               maxLines: 4,
               onChanged: (value) => notifier.value = value,
             ),
-            SizedBox(height: 10.0),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                InkWell(
-                  onTap: () => ref.watch(agreementProvider.notifier).value =
-                      !ref.watch(agreementProvider),
-                  customBorder: CircleBorder(),
-                  child: Container(
-                    padding: EdgeInsets.all(4.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: ref.watch(agreementProvider)
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).cardColor,
+            SizedBox(height: 6.0),
+            InkWell(
+              onTap: () => ref.watch(agreementProvider.notifier).value =
+                  !ref.watch(agreementProvider),
+              borderRadius: BorderRadius.circular(20.0),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Ink(
+                      padding: EdgeInsets.all(4.0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: ref.watch(agreementProvider)
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).cardColor,
+                      ),
+                      child: Icon(
+                        UniconsLine.check,
+                        size: 12.0,
+                        color: ref.watch(agreementProvider)
+                            ? Theme.of(context).cardColor
+                            : Theme.of(context).colorScheme.primary,
+                      ),
                     ),
-                    child: Icon(
-                      UniconsLine.check,
-                      size: 12.0,
-                      color: ref.watch(agreementProvider)
-                          ? Theme.of(context).cardColor
-                          : Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
+                    SizedBox(width: 8.0),
+                    Text('모바일 고유식별번호 수집을 동의합니다'),
+                  ],
                 ),
-                SizedBox(width: 8.0),
-                Text('모바일 고유식별번호 수집을 동의합니다'),
-              ],
+              ),
             ),
-            SizedBox(height: 10.0),
+            SizedBox(height: 6.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -133,6 +137,7 @@ class _DetailAddCommentDialogState
                             device: widget.device,
                             deviceId: widget.deviceId,
                             text: ref.watch(commentProvider),
+                            date: DateTime.now(),
                           )).future);
                           Navigator.pop(context);
                         }

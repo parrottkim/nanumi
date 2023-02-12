@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nanumi/constants/constants.dart';
 import 'package:nanumi/models/organization.dart';
 import 'package:nanumi/pages/detail/widgets/detail_add_comment_dialog.dart';
+import 'package:nanumi/pages/detail/widgets/detail_comment_list_dialog.dart';
 import 'package:nanumi/pages/organization/widgets/area_section.dart';
 import 'package:nanumi/pages/organization/widgets/domain_section.dart';
 import 'package:nanumi/widgets/banner_advertise.dart';
@@ -42,7 +43,7 @@ class DetailContent extends StatelessWidget {
           SizedBox(height: 16.0),
           SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 15,
+            height: MediaQuery.of(context).size.height / 8,
             child: BannerAdvertise(),
           ),
           SizedBox(height: 16.0),
@@ -128,7 +129,14 @@ class DetailContent extends StatelessWidget {
           ),
           SizedBox(height: 12.0),
           InkWell(
-            onTap: () {},
+            onTap: () => showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (_) => DetailCommentListDialog(
+                organization: organization,
+              ),
+            ),
             child: Ink(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),

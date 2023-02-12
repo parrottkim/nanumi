@@ -1,13 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/models/organization.dart';
 import 'package:nanumi/pages/detail/argument/detail_argument.dart';
+import 'package:nanumi/pages/organization/controller/list_controller.dart';
 import 'package:nanumi/pages/organization/widgets/area_section.dart';
 import 'package:nanumi/pages/organization/widgets/domain_section.dart';
 import 'package:unicons/unicons.dart';
 
-class OrganizationListItem extends StatelessWidget {
+class OrganizationListItem extends ConsumerWidget {
   const OrganizationListItem({
     Key? key,
     required this.organization,
@@ -16,7 +18,7 @@ class OrganizationListItem extends StatelessWidget {
   final Organization organization;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () => Navigator.pushNamed(
         context,
@@ -58,7 +60,7 @@ class OrganizationListItem extends StatelessWidget {
                       size: 16.0,
                     ),
                     SizedBox(width: 4.0),
-                    // Text('${organization.likes}'),
+                    Text('${ref.watch(likeCountProvider(organization.id))}'),
                   ],
                 ),
               ],

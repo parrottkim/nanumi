@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/models/organization.dart';
 import 'package:unicons/unicons.dart';
 
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 final allCountProvider =
     StateNotifierProvider<AllCountNotifier, int>((ref) => AllCountNotifier());
 
@@ -12,11 +14,32 @@ class AllCountNotifier extends StateNotifier<int> {
     _fetchFirestoreCount();
   }
 
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
   _fetchFirestoreCount() async {
     AggregateQuerySnapshot query =
         await _firestore.collection('organizations').count().get();
+    state = query.count;
+  }
+}
+
+final likeCountProvider =
+    StateNotifierProvider.family<LikeCountNotifier, int, String>(
+        (ref, id) => LikeCountNotifier(ref: ref, id: id));
+
+class LikeCountNotifier extends StateNotifier<int> {
+  LikeCountNotifier({required this.ref, required this.id}) : super(0) {
+    _fetchFirestoreCount();
+  }
+
+  final Ref ref;
+  final String id;
+
+  _fetchFirestoreCount() async {
+    AggregateQuerySnapshot query = await _firestore
+        .collection('organizations')
+        .doc(id)
+        .collection('likes')
+        .count()
+        .get();
     state = query.count;
   }
 }
@@ -46,10 +69,9 @@ class ListNotifier extends StateNotifier<List<Organization>> {
 
     print(filter[index]);
 
-    Query<Map<String, dynamic>> query = _firestore
-        .collection('organizations')
-        .orderBy(filter[index]['flag'],
-            descending: filter[index]['descending']);
+    final query = _firestore.collection('organizations').orderBy(
+        filter[index]['flag'],
+        descending: filter[index]['descending']);
 
     if (state.isEmpty) {
       documents = await query.limit(10).get();
@@ -63,8 +85,8 @@ class ListNotifier extends StateNotifier<List<Organization>> {
     if (mounted) {
       return state = [
         ...state,
-        ...documents.docs
-            .map<Organization>((element) => Organization.fromFire(element)),
+        ...documents.docs.map<Organization>(
+            (element) => Organization.fromFirestore(element)),
       ];
     }
   }

@@ -10,7 +10,7 @@ ThemeData lightTheme = ThemeData(
   cardColor: Colors.white,
   shadowColor: Colors.grey.withOpacity(0.25),
   splashColor: Colors.transparent,
-  dividerColor: Colors.grey[700],
+  dividerColor: Colors.grey[400],
   highlightColor: Colors.black.withOpacity(0.1),
   colorScheme: ColorScheme.fromSwatch(
     brightness: Brightness.light,
