@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/pages/organization/controller/list_controller.dart';
-import 'package:nanumi/pages/organization/widgets/organization_search.dart';
+import 'package:nanumi/pages/organization/widgets/organization_filter.dart';
 import 'package:nanumi/pages/organization/widgets/organization_list_item.dart';
 import 'package:nanumi/widgets/default_progress_indicator.dart';
 import 'package:unicons/unicons.dart';

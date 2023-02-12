@@ -8,8 +8,9 @@ ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: Color(0xFFF4F6F5),
   primaryColor: Colors.white,
   cardColor: Colors.white,
-  shadowColor: Colors.grey.withOpacity(0.75),
+  shadowColor: Colors.grey.withOpacity(0.25),
   splashColor: Colors.transparent,
+  dividerColor: Colors.grey[700],
   highlightColor: Colors.black.withOpacity(0.1),
   colorScheme: ColorScheme.fromSwatch(
     brightness: Brightness.light,
@@ -27,6 +28,7 @@ ThemeData lightTheme = ThemeData(
     ),
   ),
   appBarTheme: AppBarTheme(
+    elevation: 2.0,
     backgroundColor: Color(0xFFF4F6F5),
     foregroundColor: Color(0xFF3B4E52),
     shadowColor: Colors.grey.withOpacity(0.75),
@@ -103,6 +105,7 @@ ThemeData darkTheme = ThemeData(
   cardColor: Colors.grey[800],
   shadowColor: Colors.black.withOpacity(0.75),
   splashColor: Colors.transparent,
+  dividerColor: Colors.grey[400],
   highlightColor: Colors.black.withOpacity(0.1),
   colorScheme: ColorScheme.fromSwatch(
     brightness: Brightness.dark,

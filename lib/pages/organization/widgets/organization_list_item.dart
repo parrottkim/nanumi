@@ -58,7 +58,7 @@ class OrganizationListItem extends StatelessWidget {
                       size: 16.0,
                     ),
                     SizedBox(width: 4.0),
-                    Text('${organization.likes}'),
+                    // Text('${organization.likes}'),
                   ],
                 ),
               ],

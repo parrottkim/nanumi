@@ -42,7 +42,9 @@ class OrganizationFilter extends ConsumerWidget {
                     notifier.filter[index]['text'],
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: state == index ? Colors.white : Colors.black,
+                      color: state == index
+                          ? Colors.white
+                          : Theme.of(context).colorScheme.outline,
                     ),
                   ),
                 ),

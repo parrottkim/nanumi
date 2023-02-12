@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,6 +15,7 @@ class _PreferredAppBarSize extends Size {
 class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   DashboardAppBar({
     Key? key,
+    this.elevation = 2.0,
     this.centerTitle = false,
     this.title,
     this.leading,
@@ -24,6 +27,7 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   }) : preferredSize =
             _PreferredAppBarSize(toolbarHeight, bottom?.preferredSize.height);
 
+  final double? elevation;
   final bool? centerTitle;
   final Widget? title;
   final Widget? leading;
@@ -39,16 +43,24 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: elevation,
+      backgroundColor: backgroundColor,
       centerTitle: centerTitle,
       automaticallyImplyLeading: false,
-      leading: leading,
-      title: title,
-      actions: action != null
-          ? [
-              ...action!,
-              SizedBox(width: 8.0),
-            ]
-          : null,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          if (leading != null) leading!,
+          if (title != null) title!,
+          Spacer(),
+          if (action != null)
+            Row(
+              children: [
+                ...action!,
+              ],
+            ),
+        ],
+      ),
       bottom: bottom,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarBrightness: brightness,

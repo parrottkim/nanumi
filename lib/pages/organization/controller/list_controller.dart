@@ -63,8 +63,8 @@ class ListNotifier extends StateNotifier<List<Organization>> {
     if (mounted) {
       return state = [
         ...state,
-        ...documents.docs.map<Organization>(
-            (element) => Organization.fromJson(element.data())),
+        ...documents.docs
+            .map<Organization>((element) => Organization.fromFire(element)),
       ];
     }
   }

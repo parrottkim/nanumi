@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nanumi/pages/dashboard/widgets/dashboard_appbar_button.dart';
 import 'package:nanumi/pages/dashboard/widgets/dashboard_tabbar_view.dart';
 import 'package:nanumi/pages/dashboard/widgets/dashboard_tabbar.dart';
 import 'package:nanumi/pages/dashboard/widgets/dashboard_appbar.dart';
@@ -41,13 +42,10 @@ class _DashboardPageState extends ConsumerState<DashboardPage>
       appBar: DashboardAppBar(
         title: Logo(),
         action: [
-          InkWell(
-            onTap: () {},
-            customBorder: CircleBorder(),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(UniconsLine.cog),
-            ),
+          DashboardAppBarButton(
+            showShadow: false,
+            onPressed: () => Navigator.pushNamed(context, '/setting'),
+            icon: Icon(UniconsLine.cog),
           ),
         ],
         bottom: DashboardTabBar(

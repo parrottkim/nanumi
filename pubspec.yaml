@@ -27,6 +27,10 @@ dependencies:
   pull_to_refresh: ^2.0.0
   google_mobile_ads: ^2.3.0
   shimmer: ^2.0.0
+  url_launcher: ^6.1.9
+  flutter_native_splash: ^2.2.17
+  device_info_plus: ^8.1.0
+  network_info_plus: ^3.0.2
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +46,7 @@ flutter:
     - assets/
     - assets/fonts/
     - assets/icons/
+    - assets/images/
 
   fonts:
     - family: Pretendard
@@ -85,3 +90,11 @@ flutter:
           weight: 200
         - asset: assets/fonts/Raleway/Raleway-Thin.ttf
           weight: 100
+
+flutter_native_splash:
+  color: "#E5E7E8"
+  image: assets/splash_icon.png
+
+  android_12:
+    image: assets/splash_icon.png
+    icon_background_color: "#E5E7E8"
