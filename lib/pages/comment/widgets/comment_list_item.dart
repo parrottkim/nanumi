@@ -3,8 +3,8 @@ import 'package:nanumi/constants/constants.dart';
 import 'package:nanumi/models/comment.dart';
 import 'package:unicons/unicons.dart';
 
-class DetailCommentListItem extends StatelessWidget {
-  const DetailCommentListItem({
+class CommentListItem extends StatelessWidget {
+  const CommentListItem({
     Key? key,
     required this.comment,
   }) : super(key: key);

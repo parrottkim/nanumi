@@ -44,11 +44,12 @@ class LikeCountNotifier extends StateNotifier<int> {
   }
 }
 
-final listProvider = StateNotifierProvider<ListNotifier, List<Organization>>(
-    (ref) => ListNotifier(ref: ref));
+final listProvider =
+    StateNotifierProvider<ListNotifier, AsyncValue<List<Organization>>>(
+        (ref) => ListNotifier(ref: ref));
 
-class ListNotifier extends StateNotifier<List<Organization>> {
-  ListNotifier({required this.ref}) : super([]) {
+class ListNotifier extends StateNotifier<AsyncValue<List<Organization>>> {
+  ListNotifier({required this.ref}) : super(AsyncLoading()) {
     fetchFirestoreData();
   }
 
@@ -67,13 +68,11 @@ class ListNotifier extends StateNotifier<List<Organization>> {
     final filter = ref.watch(filterProvider.notifier).filter;
     final index = ref.watch(filterProvider);
 
-    print(filter[index]);
-
     final query = _firestore.collection('organizations').orderBy(
         filter[index]['flag'],
         descending: filter[index]['descending']);
 
-    if (state.isEmpty) {
+    if (state.value == null) {
       documents = await query.limit(10).get();
     } else {
       documents =
@@ -83,16 +82,16 @@ class ListNotifier extends StateNotifier<List<Organization>> {
     _isLoading = false;
 
     if (mounted) {
-      return state = [
-        ...state,
+      return state = AsyncValue.data([
+        if (state.value != null) ...state.value!,
         ...documents.docs.map<Organization>(
             (element) => Organization.fromFirestore(element)),
-      ];
+      ]);
     }
   }
 
   refresh() async {
-    state.clear();
+    state = AsyncLoading();
     await fetchFirestoreData();
   }
 }

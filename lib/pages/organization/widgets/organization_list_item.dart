@@ -44,15 +44,17 @@ class OrganizationListItem extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  organization.name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18.0,
+                Expanded(
+                  child: Text(
+                    organization.name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18.0,
+                    ),
                   ),
                 ),
+                SizedBox(width: 10.0),
                 Row(
                   children: [
                     Icon(

@@ -1,17 +1,19 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/constants/constants.dart';
 import 'package:nanumi/models/organization.dart';
+import 'package:nanumi/pages/comment/comment_page.dart';
 import 'package:nanumi/pages/detail/widgets/detail_add_comment_dialog.dart';
-import 'package:nanumi/pages/detail/widgets/detail_comment_list_dialog.dart';
+import 'package:nanumi/pages/organization/controller/list_controller.dart';
 import 'package:nanumi/pages/organization/widgets/area_section.dart';
 import 'package:nanumi/pages/organization/widgets/domain_section.dart';
 import 'package:nanumi/widgets/banner_advertise.dart';
 import 'package:unicons/unicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DetailContent extends StatelessWidget {
+class DetailContent extends ConsumerWidget {
   const DetailContent({
     Key? key,
     required this.organization,
@@ -20,7 +22,7 @@ class DetailContent extends StatelessWidget {
   final Organization organization;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -29,13 +31,36 @@ class DetailContent extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height / 3.5 + 20.0,
           ),
-          Text(
-            organization.name,
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 24.0,
-              color: Theme.of(context).colorScheme.outline,
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  organization.name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 24.0,
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
+                ),
+              ),
+              SizedBox(width: 10.0),
+              Row(
+                children: [
+                  Icon(
+                    UniconsLine.thumbs_up,
+                    size: 20.0,
+                  ),
+                  SizedBox(width: 6.0),
+                  Text(
+                    '${ref.watch(likeCountProvider(organization.id))}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
           DomainSection(organization: organization),
           SizedBox(height: 12.0),
@@ -47,41 +72,42 @@ class DetailContent extends StatelessWidget {
             child: BannerAdvertise(),
           ),
           SizedBox(height: 16.0),
-          InkWell(
-            onTap: () => launchUrl(
-              Uri.parse(organization.website),
-            ),
-            child: Ink(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Theme.of(context).shadowColor,
-                    spreadRadius: 0.0,
-                    blurRadius: 2.0,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-                color: Theme.of(context).cardColor,
+          if (organization.website.isNotEmpty)
+            InkWell(
+              onTap: () => launchUrl(
+                Uri.parse(organization.website),
               ),
-              child: Row(
-                children: [
-                  Icon(UniconsLine.link),
-                  SizedBox(width: 8.0),
-                  Text(
-                    '홈페이지 방문',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Theme.of(context).colorScheme.outline,
+              child: Ink(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 12.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(context).shadowColor,
+                      spreadRadius: 0.0,
+                      blurRadius: 2.0,
+                      offset: Offset(0, 3),
                     ),
-                  ),
-                ],
+                  ],
+                  color: Theme.of(context).cardColor,
+                ),
+                child: Row(
+                  children: [
+                    Icon(UniconsLine.link),
+                    SizedBox(width: 8.0),
+                    Text(
+                      '홈페이지 방문',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 12.0),
+          if (organization.website.isNotEmpty) SizedBox(height: 12.0),
           InkWell(
             onTap: () async {
               final info = await getDeviceInfo();
@@ -133,7 +159,7 @@ class DetailContent extends StatelessWidget {
               context: context,
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
-              builder: (_) => DetailCommentListDialog(
+              builder: (_) => CommentPage(
                 organization: organization,
               ),
             ),

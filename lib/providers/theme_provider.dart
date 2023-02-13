@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
@@ -35,6 +36,11 @@ ThemeData lightTheme = ThemeData(
     shadowColor: Colors.grey.withOpacity(0.75),
     iconTheme: IconThemeData(
       color: Color(0xFF3B4E52),
+    ),
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
     ),
   ),
   buttonTheme: ButtonThemeData(
@@ -74,7 +80,7 @@ ThemeData darkTheme = ThemeData(
   ).copyWith(
     primary: Color(0xFF669F85),
     secondary: Color(0xFFE5E7E8),
-    tertiary: Color(0xFF556F63),
+    tertiary: Color(0xFFECF1EF),
     outline: Color(0xFFE5E7E8),
   ),
   textTheme: TextTheme(
@@ -90,6 +96,11 @@ ThemeData darkTheme = ThemeData(
     shadowColor: Colors.black.withOpacity(0.75),
     iconTheme: IconThemeData(
       color: Color(0xFFE5E7E8),
+    ),
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
     ),
   ),
   buttonTheme: ButtonThemeData(

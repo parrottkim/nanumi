@@ -13,6 +13,9 @@ class OrganizationFilter extends ConsumerWidget {
     final state = ref.watch(filterProvider);
     final notifier = ref.watch(filterProvider.notifier);
 
+    final textColor = Theme.of(context).primaryColor;
+    final backgroundColor = Theme.of(context).colorScheme.outline;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -33,22 +36,16 @@ class OrganizationFilter extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(20.0),
                     border: Border.all(
                       width: 2.0,
-                      color: Theme.of(context).colorScheme.tertiary,
+                      color: backgroundColor,
                     ),
-                    color: state == index
-                        ? Theme.of(context).colorScheme.tertiary
-                        : Colors.transparent,
+                    color:
+                        state == index ? backgroundColor : Colors.transparent,
                   ),
                   child: Text(
                     notifier.filter[index]['text'],
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: state == index
-                          ? Theme.of(context).colorScheme.tertiary ==
-                                  Color(0xFF556F63)
-                              ? Colors.white
-                              : Colors.black
-                          : Theme.of(context).colorScheme.tertiary,
+                      color: state == index ? textColor : backgroundColor,
                     ),
                   ),
                 ),

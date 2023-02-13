@@ -22,7 +22,6 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.action,
     this.bottom,
     this.backgroundColor,
-    this.brightness = Brightness.light,
     this.toolbarHeight = 56.0,
   }) : preferredSize =
             _PreferredAppBarSize(toolbarHeight, bottom?.preferredSize.height);
@@ -34,7 +33,6 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? action;
   final PreferredSizeWidget? bottom;
   final Color? backgroundColor;
-  final Brightness brightness;
   final double toolbarHeight;
 
   @override
@@ -63,9 +61,6 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       bottom: bottom,
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarBrightness: brightness,
-      ),
     );
   }
 }

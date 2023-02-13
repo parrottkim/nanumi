@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/pages/organization/controller/list_controller.dart';
+import 'package:nanumi/pages/organization/widgets/organization_error.dart';
 import 'package:nanumi/pages/organization/widgets/organization_filter.dart';
 import 'package:nanumi/pages/organization/widgets/organization_list_item.dart';
+import 'package:nanumi/pages/organization/widgets/organization_shimmer.dart';
 import 'package:nanumi/widgets/default_progress_indicator.dart';
 import 'package:unicons/unicons.dart';
 
@@ -22,7 +24,7 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage>
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(listProvider);
+    final async = ref.watch(listProvider);
     final allCount = ref.watch(allCountProvider);
 
     return RefreshIndicator(
@@ -32,26 +34,30 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage>
           builder: (context, constraints) => ConstrainedBox(
             constraints: BoxConstraints(minHeight: constraints.maxHeight),
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 8.0),
-                  OrganizationFilter(),
-                  ListView.separated(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    itemCount: state.length < allCount
-                        ? state.length + 1
-                        : state.length,
-                    itemBuilder: (context, index) => index != state.length
-                        ? OrganizationListItem(
-                            organization: state[index],
-                          )
-                        : DefaultProgressIndicator(),
-                    separatorBuilder: (context, index) =>
-                        SizedBox(height: 16.0),
-                  ),
-                ],
+              child: async.when(
+                data: (data) => Column(
+                  children: [
+                    SizedBox(height: 8.0),
+                    OrganizationFilter(),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      itemCount: data.length < allCount
+                          ? data.length + 1
+                          : data.length,
+                      itemBuilder: (context, index) => index != data.length
+                          ? OrganizationListItem(
+                              organization: data[index],
+                            )
+                          : DefaultProgressIndicator(),
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 16.0),
+                    ),
+                  ],
+                ),
+                error: (error, stackTrace) => OrganizationError(error: error),
+                loading: () => OrganizationShimmer(),
               ),
             ),
           ),
