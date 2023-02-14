@@ -21,7 +21,7 @@ class CommentPage extends ConsumerWidget {
     final async = ref.watch(commentListProvider(organization.id));
     final notifier = ref.watch(commentListProvider(organization.id).notifier);
 
-    final allCount = ref.watch(likeCountProvider(organization.id));
+    final totalCount = ref.watch(likeTotalCountProvider(organization.id));
 
     return Padding(
       padding: EdgeInsets.only(
@@ -56,7 +56,7 @@ class CommentPage extends ConsumerWidget {
                   data: (data) => data.isNotEmpty
                       ? NotificationListener<ScrollNotification>(
                           child: ListView.separated(
-                            itemCount: data.length < allCount
+                            itemCount: data.length < totalCount
                                 ? data.length + 1
                                 : data.length,
                             itemBuilder: (context, index) =>

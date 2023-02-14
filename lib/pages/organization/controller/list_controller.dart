@@ -6,11 +6,12 @@ import 'package:unicons/unicons.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-final allCountProvider =
-    StateNotifierProvider<AllCountNotifier, int>((ref) => AllCountNotifier());
+final organizationTotalCountProvider =
+    StateNotifierProvider<OrganizationTotalCountNotifier, int>(
+        (ref) => OrganizationTotalCountNotifier());
 
-class AllCountNotifier extends StateNotifier<int> {
-  AllCountNotifier() : super(0) {
+class OrganizationTotalCountNotifier extends StateNotifier<int> {
+  OrganizationTotalCountNotifier() : super(0) {
     _fetchFirestoreCount();
   }
 
@@ -21,12 +22,12 @@ class AllCountNotifier extends StateNotifier<int> {
   }
 }
 
-final likeCountProvider =
-    StateNotifierProvider.family<LikeCountNotifier, int, String>(
-        (ref, id) => LikeCountNotifier(ref: ref, id: id));
+final likeTotalCountProvider =
+    StateNotifierProvider.family<LikeTotalCountNotifier, int, String>(
+        (ref, id) => LikeTotalCountNotifier(ref: ref, id: id));
 
-class LikeCountNotifier extends StateNotifier<int> {
-  LikeCountNotifier({required this.ref, required this.id}) : super(0) {
+class LikeTotalCountNotifier extends StateNotifier<int> {
+  LikeTotalCountNotifier({required this.ref, required this.id}) : super(0) {
     _fetchFirestoreCount();
   }
 

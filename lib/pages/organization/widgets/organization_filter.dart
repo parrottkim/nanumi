@@ -8,7 +8,7 @@ class OrganizationFilter extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final allCount = ref.watch(allCountProvider);
+    final totalCount = ref.watch(organizationTotalCountProvider);
 
     final state = ref.watch(filterProvider);
     final notifier = ref.watch(filterProvider.notifier);
@@ -75,7 +75,7 @@ class OrganizationFilter extends ConsumerWidget {
           //   child: Text('좋아요 순'),
           // ),
           Spacer(),
-          Text('전체 ${allCount}건'),
+          Text('전체 ${totalCount}건'),
         ],
       ),
     );

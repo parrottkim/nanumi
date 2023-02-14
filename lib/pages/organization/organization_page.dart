@@ -25,7 +25,7 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage>
   @override
   Widget build(BuildContext context) {
     final async = ref.watch(listProvider);
-    final allCount = ref.watch(allCountProvider);
+    final totalCount = ref.watch(organizationTotalCountProvider);
 
     return RefreshIndicator(
       onRefresh: () async => ref.watch(listProvider.notifier).refresh(),
@@ -43,7 +43,7 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage>
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      itemCount: data.length < allCount
+                      itemCount: data.length < totalCount
                           ? data.length + 1
                           : data.length,
                       itemBuilder: (context, index) => index != data.length

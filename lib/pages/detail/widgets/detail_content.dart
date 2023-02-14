@@ -52,7 +52,7 @@ class DetailContent extends ConsumerWidget {
                   ),
                   SizedBox(width: 6.0),
                   Text(
-                    '${ref.watch(likeCountProvider(organization.id))}',
+                    '${ref.watch(likeTotalCountProvider(organization.id))}',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 16.0,

@@ -62,7 +62,8 @@ class OrganizationListItem extends ConsumerWidget {
                       size: 16.0,
                     ),
                     SizedBox(width: 4.0),
-                    Text('${ref.watch(likeCountProvider(organization.id))}'),
+                    Text(
+                        '${ref.watch(likeTotalCountProvider(organization.id))}'),
                   ],
                 ),
               ],
