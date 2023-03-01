@@ -32,6 +32,7 @@ dependencies:
   device_info_plus: ^8.1.0
   network_info_plus: ^3.0.2
   intl: ^0.18.0
+  flutter_udid: ^2.0.1
 
 dev_dependencies:
   flutter_test:

@@ -7,7 +7,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nanumi/constants/routes.dart';
 import 'package:nanumi/firebase_options.dart';
-import 'package:nanumi/pages/dashboard/dashboard_page.dart';
 import 'package:nanumi/providers/theme_provider.dart';
 import 'package:path_provider/path_provider.dart';
 

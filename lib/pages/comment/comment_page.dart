@@ -41,10 +41,10 @@ class CommentPage extends ConsumerWidget {
           children: [
             Text(
               '의견 보기',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 16.0,
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontSize: 18.0),
             ),
             SizedBox(height: 6.0),
             Text('근거 없는 비방, 상업적 게시글 및 욕설은 통보없이 삭제될 수 있습니다.'),

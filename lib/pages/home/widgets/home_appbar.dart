@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class _PreferredAppBarSize extends Size {
   _PreferredAppBarSize(this.toolbarHeight, this.bottomHeight)
@@ -12,8 +9,8 @@ class _PreferredAppBarSize extends Size {
   final double? bottomHeight;
 }
 
-class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
-  DashboardAppBar({
+class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+  HomeAppBar({
     Key? key,
     this.elevation = 2.0,
     this.centerTitle = false,
@@ -46,20 +43,8 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
           backgroundColor ?? Theme.of(context).appBarTheme.backgroundColor,
       centerTitle: centerTitle,
       automaticallyImplyLeading: false,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          if (leading != null) leading!,
-          if (title != null) title!,
-          Spacer(),
-          if (action != null)
-            Row(
-              children: [
-                ...action!,
-              ],
-            ),
-        ],
-      ),
+      title: title,
+      actions: action,
       bottom: bottom,
     );
   }

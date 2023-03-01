@@ -23,7 +23,15 @@ ThemeData lightTheme = ThemeData(
     outline: Color(0xFF3B4E52),
   ),
   textTheme: TextTheme(
-    subtitle1: TextStyle(
+    headlineSmall: TextStyle(
+      fontWeight: FontWeight.w700,
+      fontSize: 24.0,
+    ),
+    titleLarge: TextStyle(
+      fontWeight: FontWeight.w700,
+      fontSize: 20.0,
+    ),
+    bodySmall: TextStyle(
       fontWeight: FontWeight.w400,
       fontSize: 14.0,
       color: Colors.grey[700],
@@ -84,7 +92,19 @@ ThemeData darkTheme = ThemeData(
     outline: Color(0xFFE5E7E8),
   ),
   textTheme: TextTheme(
-    subtitle1: TextStyle(
+    headlineSmall: TextStyle(
+      fontWeight: FontWeight.w700,
+      fontSize: 24.0,
+    ),
+    titleLarge: TextStyle(
+      fontWeight: FontWeight.w700,
+      fontSize: 20.0,
+    ),
+    titleMedium: TextStyle(
+      fontWeight: FontWeight.w700,
+      fontSize: 20.0,
+    ),
+    bodySmall: TextStyle(
       fontWeight: FontWeight.w400,
       fontSize: 14.0,
       color: Colors.grey[400],

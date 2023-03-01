@@ -13,7 +13,7 @@ class DomainSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       organization.domain.join(', '),
-      style: Theme.of(context).textTheme.subtitle1,
+      style: Theme.of(context).textTheme.bodySmall,
     );
   }
 }

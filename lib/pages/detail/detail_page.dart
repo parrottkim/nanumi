@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nanumi/pages/dashboard/widgets/dashboard_appbar.dart';
 import 'package:nanumi/pages/detail/argument/detail_argument.dart';
 import 'package:nanumi/pages/detail/widgets/detail_background.dart';
 import 'package:nanumi/pages/detail/widgets/detail_content.dart';
-import 'package:nanumi/pages/dashboard/widgets/dashboard_appbar_button.dart';
+import 'package:nanumi/widgets/default_appbar.dart';
+import 'package:nanumi/widgets/elevated_icon_button.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({Key? key}) : super(key: key);
@@ -15,11 +15,11 @@ class DetailPage extends StatelessWidget {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: DashboardAppBar(
+      appBar: DefaultAppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        leading: DashboardAppBarButton(),
+        leading: ElevatedIconButton(),
       ),
       body: Stack(
         children: [

@@ -75,7 +75,10 @@ class OrganizationFilter extends ConsumerWidget {
           //   child: Text('좋아요 순'),
           // ),
           Spacer(),
-          Text('전체 ${totalCount}건'),
+          Text(
+            '전체 ${totalCount}건',
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
         ],
       ),
     );

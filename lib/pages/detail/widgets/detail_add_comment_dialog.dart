@@ -52,13 +52,15 @@ class _DetailAddCommentDialogState
           children: [
             Text(
               '의견 남기기',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 16.0,
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontSize: 18.0),
             ),
             SizedBox(height: 6.0),
-            Text('한 기기당 한 개의 의견만 남길 수 있습니다.\n중복으로 작성된 경우에는 기존 의견이 삭제됩니다.'),
+            Text(
+              '한 기기당 한 개의 의견만 남길 수 있습니다.\n중복으로 작성된 경우에는 기존 의견이 삭제됩니다.',
+            ),
             SizedBox(height: 6.0),
             Row(
               children: [
