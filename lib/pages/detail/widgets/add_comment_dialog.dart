@@ -4,7 +4,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nanumi/constants/constants.dart';
 import 'package:nanumi/models/comment.dart';
 import 'package:nanumi/models/organization.dart';
 import 'package:nanumi/pages/detail/controller/detail_controller.dart';

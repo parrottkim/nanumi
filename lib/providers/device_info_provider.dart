@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_udid/flutter_udid.dart';
-import 'package:nanumi/constants/constants.dart';
+import 'package:nanumi/services/constants.dart';
 
 final deviceInfoProvider =
     StateNotifierProvider<DeviceInfoNotifier, List<String>>(

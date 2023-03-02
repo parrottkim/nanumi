@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nanumi/constants/constants.dart';
 import 'package:nanumi/models/comment.dart';
+import 'package:nanumi/services/constants.dart';
 import 'package:unicons/unicons.dart';
 
 class CommentListItem extends StatelessWidget {
