@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/models/organization.dart';
-import 'package:nanumi/pages/comment/controller/comment_controller.dart';
-import 'package:nanumi/pages/comment/widgets/comment_list_item.dart';
-import 'package:nanumi/pages/comment/widgets/comment_no_element.dart';
-import 'package:nanumi/pages/comment/widgets/comment_shimmer.dart';
+import 'package:nanumi/pages/detail/controller/detail_controller.dart';
+import 'package:nanumi/pages/detail/widgets/comment_list_item.dart';
+import 'package:nanumi/pages/detail/widgets/comment_no_element.dart';
+import 'package:nanumi/pages/detail/widgets/comment_shimmer.dart';
 import 'package:nanumi/pages/organization/controller/list_controller.dart';
 import 'package:nanumi/widgets/default_progress_indicator.dart';
 
-class CommentPage extends ConsumerWidget {
-  const CommentPage({
+class CommentDialog extends ConsumerWidget {
+  const CommentDialog({
     super.key,
     required this.organization,
   });
@@ -54,27 +54,16 @@ class CommentPage extends ConsumerWidget {
                 onRefresh: () async => notifier.refresh(),
                 child: async.when(
                   data: (data) => data.isNotEmpty
-                      ? NotificationListener<ScrollNotification>(
-                          child: ListView.separated(
-                            itemCount: data.length < totalCount
-                                ? data.length + 1
-                                : data.length,
-                            itemBuilder: (context, index) =>
-                                index != data.length
-                                    ? CommentListItem(comment: data[index])
-                                    : DefaultProgressIndicator(),
-                            separatorBuilder: (context, index) =>
-                                SizedBox(height: 16.0),
-                          ),
-                          onNotification: (notification) {
-                            if (notification.metrics.extentBefore ==
-                                notification.metrics.maxScrollExtent) {
-                              if (data.length >= 10) {
-                                notifier.fetchFirestoreData();
-                              }
-                            }
-                            return false;
-                          },
+                      ? ListView.separated(
+                          controller: notifier.controller,
+                          itemCount: data.length < totalCount
+                              ? data.length + 1
+                              : data.length,
+                          itemBuilder: (context, index) => index != data.length
+                              ? CommentListItem(comment: data[index])
+                              : DefaultProgressIndicator(),
+                          separatorBuilder: (context, index) =>
+                              SizedBox(height: 16.0),
                         )
                       : CommentNoElement(),
                   error: (error, stackTrace) => SizedBox(),

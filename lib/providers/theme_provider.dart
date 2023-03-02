@@ -100,10 +100,6 @@ ThemeData darkTheme = ThemeData(
       fontWeight: FontWeight.w700,
       fontSize: 20.0,
     ),
-    titleMedium: TextStyle(
-      fontWeight: FontWeight.w700,
-      fontSize: 20.0,
-    ),
     bodySmall: TextStyle(
       fontWeight: FontWeight.w400,
       fontSize: 14.0,

@@ -19,11 +19,11 @@ class Organization {
     this.image,
   });
 
+  factory Organization.fromJson(Map<String, dynamic> json) =>
+      _$OrganizationFromJson(json);
+
   factory Organization.fromFirestore(QueryDocumentSnapshot<Map> doc) =>
       _$OrganizationFromFirestore(doc);
-
-  // factory Organization.fromJson(Map<String, dynamic> json) =>
-  //     _$OrganizationFromJson(json);
 
   /// Connect the generated [_$PersonToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$OrganizationToJson(this);

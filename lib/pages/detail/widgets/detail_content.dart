@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/models/organization.dart';
-import 'package:nanumi/pages/comment/comment_page.dart';
-import 'package:nanumi/pages/detail/widgets/detail_add_comment_dialog.dart';
+import 'package:nanumi/pages/detail/widgets/comment_dialog.dart';
+import 'package:nanumi/pages/detail/widgets/add_comment_dialog.dart';
 import 'package:nanumi/pages/organization/controller/list_controller.dart';
 import 'package:nanumi/pages/organization/widgets/area_section.dart';
 import 'package:nanumi/pages/organization/widgets/domain_section.dart';
@@ -106,7 +106,7 @@ class DetailContent extends ConsumerWidget {
             onTap: () async {
               return showDialog(
                 context: context,
-                builder: (_) => DetailAddCommentDialog(
+                builder: (_) => AddCommentDialog(
                   organization: organization,
                   device: info[0],
                   deviceId: info[1],
@@ -149,7 +149,7 @@ class DetailContent extends ConsumerWidget {
               context: context,
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
-              builder: (_) => CommentPage(
+              builder: (_) => CommentDialog(
                 organization: organization,
               ),
             ),

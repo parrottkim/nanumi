@@ -6,6 +6,17 @@ part of 'organization.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      representative: json['representative'] as String,
+      website: json['website'] as String,
+      area: (json['area'] as List<dynamic>).map((e) => e as String).toList(),
+      domain:
+          (json['domain'] as List<dynamic>).map((e) => e as String).toList(),
+      image: json['image'] as String?,
+    );
+
 Organization _$OrganizationFromFirestore(QueryDocumentSnapshot<Map> doc) =>
     Organization(
       id: doc.id,

@@ -10,8 +10,8 @@ import 'package:nanumi/models/organization.dart';
 import 'package:nanumi/pages/detail/controller/detail_controller.dart';
 import 'package:unicons/unicons.dart';
 
-class DetailAddCommentDialog extends ConsumerStatefulWidget {
-  const DetailAddCommentDialog({
+class AddCommentDialog extends ConsumerStatefulWidget {
+  const AddCommentDialog({
     Key? key,
     required this.organization,
     required this.device,
@@ -24,11 +24,10 @@ class DetailAddCommentDialog extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
-      _DetailAddCommentDialogState();
+      _AddCommentDialogState();
 }
 
-class _DetailAddCommentDialogState
-    extends ConsumerState<DetailAddCommentDialog> {
+class _AddCommentDialogState extends ConsumerState<AddCommentDialog> {
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -134,13 +133,14 @@ class _DetailAddCommentDialogState
                   onTap: ref.watch(commentProvider).isNotEmpty &&
                           ref.watch(agreementProvider)
                       ? () async {
-                          ref.watch(addCommentProvider(Comment(
+                          var commnet = Comment(
                             id: widget.organization.id,
                             device: widget.device,
                             deviceId: widget.deviceId,
                             text: ref.watch(commentProvider),
-                            date: DateTime.now(),
-                          )).future);
+                            createdAt: DateTime.now(),
+                          );
+                          await ref.watch(addCommentProvider(commnet).future);
                           Navigator.pop(context);
                         }
                       : null,

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nanumi/pages/home/controller/home_controller.dart';
 
-class RecentComment extends StatelessWidget {
+class RecentComment extends ConsumerWidget {
   const RecentComment({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(recentCommentProvider);
     return Column(
       children: [
         Padding(
@@ -25,6 +28,16 @@ class RecentComment extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        state.when(
+          data: (data) => ListView.builder(
+            shrinkWrap: true,
+            itemCount: data.length,
+            itemBuilder: (context, index) => Text(
+                '${data[index].comment.id} ${data[index].organization.id}'),
+          ),
+          loading: () => SizedBox.shrink(),
+          error: (error, stackTrace) => SizedBox.shrink(),
         ),
       ],
     );
