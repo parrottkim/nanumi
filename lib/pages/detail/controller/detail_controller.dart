@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/models/comment.dart';
+import 'package:nanumi/models/organization.dart';
+import 'package:nanumi/providers/device_info_provider.dart';
 import 'package:nanumi/repositories/comment_repository.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -63,21 +65,26 @@ class CommentListNotifier extends StateNotifier<AsyncValue<List<Comment>>> {
       state = AsyncValue.data([]);
     }
 
-    // Firestore 문서 목록 스트림
+    var result = [];
+
     _repository.listenCommentStream(id).listen((event) async {
-      totalCount = await _repository.commentTotalCount(id);
-      state = AsyncValue.data(event);
+      result = event;
     });
+    await Future.delayed(Duration(milliseconds: 400));
+
+    state = AsyncValue.data([
+      if (state.value != null) ...state.value!,
+      ...result,
+    ]);
 
     _isLoading = false;
   }
 
   _scrollListeners() async {
     final reachMaxExtent =
-        controller.offset >= controller.position.maxScrollExtent - 20.0;
-    final outOfRange =
-        !controller.position.outOfRange && controller.position.pixels != 0;
-    if (reachMaxExtent && outOfRange) {
+        controller.offset >= controller.position.maxScrollExtent - 100.0 &&
+            controller.offset < controller.position.maxScrollExtent;
+    if (reachMaxExtent) {
       await _fetchFirestoreData();
     }
   }
@@ -85,5 +92,80 @@ class CommentListNotifier extends StateNotifier<AsyncValue<List<Comment>>> {
   refresh() async {
     state = AsyncLoading();
     await _fetchFirestoreData();
+  }
+}
+
+// final likedProvider =
+//     FutureProvider.family<bool, Organization>((ref, organization) async {
+//   final info = ref.watch(deviceInfoProvider);
+//   var snapshot = await _firestore
+//       .collection('organizations')
+//       .doc(organization.id)
+//       .collection('likes')
+//       .where(info[1])
+//       .count()
+//       .get();
+//   return snapshot.count > 0;
+// });
+
+final likedProvider =
+    StateNotifierProvider.family<LikedNotifier, bool, Organization>(
+        (ref, organization) =>
+            LikedNotifier(ref: ref, organization: organization));
+
+class LikedNotifier extends StateNotifier<bool> {
+  LikedNotifier({required this.ref, required this.organization})
+      : super(false) {
+    _fetchFirestoreData();
+  }
+
+  final Ref ref;
+  final Organization organization;
+
+  _fetchFirestoreData() async {
+    final info = ref.watch(deviceInfoProvider);
+    _firestore
+        .collection('organizations')
+        .doc(organization.id)
+        .collection('likes')
+        .where(info[1])
+        .snapshots()
+        .listen((event) {
+      if (event.docs.isNotEmpty) {
+        state = true;
+      } else {
+        state = false;
+      }
+    });
+  }
+
+  toggleLiked(bool flag) async {
+    final info = ref.watch(deviceInfoProvider);
+    if (flag) {
+      await _firestore.collection('organizations').doc(organization.id).set(
+        {'likes': FieldValue.increment(-1)},
+        SetOptions(merge: true),
+      );
+      await _firestore
+          .collection('organizations')
+          .doc(organization.id)
+          .collection('likes')
+          .doc(info[1])
+          .delete();
+    } else {
+      await _firestore.collection('organizations').doc(organization.id).set(
+        {'likes': FieldValue.increment(1)},
+        SetOptions(merge: true),
+      );
+      await _firestore
+          .collection('organizations')
+          .doc(organization.id)
+          .collection('likes')
+          .doc(info[1])
+          .set({
+        'id': info[1],
+        'createdAt': DateTime.now(),
+      });
+    }
   }
 }

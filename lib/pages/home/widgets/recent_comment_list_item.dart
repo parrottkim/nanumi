@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:nanumi/models/comment.dart';
+import 'package:nanumi/models/recent.dart';
 import 'package:nanumi/services/constants.dart';
 import 'package:unicons/unicons.dart';
 
-class CommentListItem extends StatelessWidget {
-  const CommentListItem({
+class RecentCommentListItem extends StatelessWidget {
+  const RecentCommentListItem({
     Key? key,
-    required this.comment,
+    required this.item,
   }) : super(key: key);
 
-  final Comment comment;
+  final Recent item;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
+    return InkWell(
       borderRadius: BorderRadius.circular(16.0),
-      child: Container(
+      onTap: () {},
+      child: Ink(
         padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 16.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
@@ -38,28 +38,31 @@ class CommentListItem extends StatelessWidget {
                 Icon(UniconsLine.mobile_android, size: 20.0),
                 SizedBox(width: 4.0),
                 Text(
-                  '${comment.device} | ${comment.deviceId.substring(0, 4)}****',
+                  '${item.comment.device} | ${item.comment.deviceId.substring(0, 4)}****',
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.outline),
                 ),
                 Spacer(),
                 Text(
-                  getDetailDate(comment.createdAt),
+                  getDetailDate(item.comment.createdAt),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
             ),
             SizedBox(height: 6.0),
             Text(
-              comment.text,
+              item.comment.text,
             ),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(vertical: 8.0),
-            //   child: Container(
-            //     height: 1.0,
-            //     color: Theme.of(context).dividerColor,
-            //   ),
-            // ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Container(
+                height: 1.0,
+                color: Theme.of(context).dividerColor,
+              ),
+            ),
+            Text(
+              item.organization.name,
+            )
           ],
         ),
       ),

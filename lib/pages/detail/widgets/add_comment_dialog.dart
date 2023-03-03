@@ -40,44 +40,55 @@ class _AddCommentDialogState extends ConsumerState<AddCommentDialog> {
     final notifier = ref.watch(commentProvider.notifier);
 
     return AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-      insetPadding: EdgeInsets.all(30.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      insetPadding: EdgeInsets.all(16.0),
+      contentPadding: EdgeInsets.all(24.0),
       content: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '의견 남기기',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontSize: 18.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '의견 남기기',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(fontSize: 18.0),
+                  ),
+                  SizedBox(height: 6.0),
+                  Text(
+                    '한 기기당 한 개의 의견만 남길 수 있습니다.\n중복으로 작성된 경우에는 기존 의견이 삭제됩니다.',
+                  ),
+                  SizedBox(height: 6.0),
+                  Row(
+                    children: [
+                      Icon(UniconsLine.mobile_android, size: 20.0),
+                      SizedBox(width: 4.0),
+                      Text(
+                        '${widget.device} | ${widget.deviceId.substring(0, 4)}****',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.outline),
+                      ),
+                    ],
+                  ),
+                  TextField(
+                    controller: _controller,
+                    minLines: 1,
+                    maxLines: 4,
+                    onChanged: (value) => notifier.value = value,
+                  ),
+                  SizedBox(height: 6.0),
+                ],
+              ),
             ),
-            SizedBox(height: 6.0),
-            Text(
-              '한 기기당 한 개의 의견만 남길 수 있습니다.\n중복으로 작성된 경우에는 기존 의견이 삭제됩니다.',
-            ),
-            SizedBox(height: 6.0),
-            Row(
-              children: [
-                Icon(UniconsLine.mobile_android, size: 20.0),
-                SizedBox(width: 4.0),
-                Text(
-                  '${widget.device} | ${widget.deviceId.substring(0, 4)}****',
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.outline),
-                ),
-              ],
-            ),
-            TextField(
-              controller: _controller,
-              minLines: 1,
-              maxLines: 4,
-              onChanged: (value) => notifier.value = value,
-            ),
-            SizedBox(height: 6.0),
             InkWell(
               onTap: () => ref.watch(agreementProvider.notifier).value =
                   !ref.watch(agreementProvider),
@@ -115,9 +126,11 @@ class _AddCommentDialogState extends ConsumerState<AddCommentDialog> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 InkWell(
+                  borderRadius: BorderRadius.circular(8.0),
                   onTap: () => Navigator.pop(context),
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     child: Text(
                       '취소',
                       style: TextStyle(
@@ -129,6 +142,7 @@ class _AddCommentDialogState extends ConsumerState<AddCommentDialog> {
                 ),
                 SizedBox(width: 20.0),
                 InkWell(
+                  borderRadius: BorderRadius.circular(8.0),
                   onTap: ref.watch(commentProvider).isNotEmpty &&
                           ref.watch(agreementProvider)
                       ? () async {
@@ -144,7 +158,8 @@ class _AddCommentDialogState extends ConsumerState<AddCommentDialog> {
                         }
                       : null,
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     child: Text(
                       '완료',
                       style: TextStyle(

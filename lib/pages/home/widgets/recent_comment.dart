@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/pages/home/controller/home_controller.dart';
+import 'package:nanumi/pages/home/widgets/recent_comment_list_item.dart';
 
 class RecentComment extends ConsumerWidget {
   const RecentComment({Key? key}) : super(key: key);
@@ -8,38 +9,30 @@ class RecentComment extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(recentCommentProvider);
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            children: [
-              Text(
-                '최근 의견',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              Spacer(),
-              InkWell(
-                onTap: () => Navigator.pushNamed(context, '/organization'),
-                child: Text(
-                  '더 보기',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '최근 반응',
+            style: Theme.of(context).textTheme.titleLarge,
           ),
-        ),
-        state.when(
-          data: (data) => ListView.builder(
-            shrinkWrap: true,
-            itemCount: data.length,
-            itemBuilder: (context, index) => Text(
-                '${data[index].comment.id} ${data[index].organization.id}'),
+          SizedBox(height: 12.0),
+          state.when(
+            data: (data) => ListView.separated(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: data.length,
+              itemBuilder: (context, index) =>
+                  RecentCommentListItem(item: data[index]),
+              separatorBuilder: (context, index) => SizedBox(height: 8.0),
+            ),
+            loading: () => SizedBox.shrink(),
+            error: (error, stackTrace) => SizedBox.shrink(),
           ),
-          loading: () => SizedBox.shrink(),
-          error: (error, stackTrace) => SizedBox.shrink(),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

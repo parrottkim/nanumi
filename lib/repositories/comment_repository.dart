@@ -9,7 +9,7 @@ final StreamController<List<Comment>> _streamController =
 
 class CommentRepository {
   List<List<Comment>> _comments = [];
-  DocumentSnapshot? _lastDocument;
+  // DocumentSnapshot? _lastDocument;
 
   Stream<List<Comment>> listenCommentStream(String id) {
     fetchRecentList(id);
@@ -24,9 +24,9 @@ class CommentRepository {
         .limit(limit);
     List<Comment> results = [];
 
-    if (_lastDocument != null) {
-      query = query.startAfterDocument(_lastDocument!);
-    }
+    // if (_lastDocument != null) {
+    //   query = query.startAfterDocument(_lastDocument!);
+    // }
 
     var currentRequestIndex = _comments.length;
 
@@ -60,9 +60,9 @@ class CommentRepository {
       }
 
       // 마지막 문서 지정
-      if (results.isNotEmpty && currentRequestIndex == _comments.length - 1) {
-        _lastDocument = event.docs.last;
-      }
+      // if (results.isNotEmpty && currentRequestIndex == _comments.length - 1) {
+      //   _lastDocument = event.docs.last;
+      // }
     });
   }
 

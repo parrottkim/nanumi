@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/models/organization.dart';
 import 'package:nanumi/pages/detail/argument/detail_argument.dart';
-import 'package:nanumi/pages/organization/controller/list_controller.dart';
 import 'package:nanumi/pages/organization/widgets/area_section.dart';
 import 'package:nanumi/pages/organization/widgets/domain_section.dart';
 import 'package:unicons/unicons.dart';
@@ -62,8 +61,7 @@ class OrganizationListItem extends ConsumerWidget {
                       size: 16.0,
                     ),
                     SizedBox(width: 4.0),
-                    Text(
-                        '${ref.watch(likeTotalCountProvider(organization.id))}'),
+                    Text('${organization.likes}'),
                   ],
                 ),
               ],

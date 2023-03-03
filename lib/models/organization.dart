@@ -6,6 +6,7 @@ part 'organization.g.dart';
 @JsonSerializable()
 class Organization {
   final String id, name, representative, website;
+  final int likes;
   final List<String> area, domain;
   final String? image;
 
@@ -14,6 +15,7 @@ class Organization {
     required this.name,
     required this.representative,
     required this.website,
+    required this.likes,
     required this.area,
     required this.domain,
     this.image,

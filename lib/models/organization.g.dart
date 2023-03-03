@@ -11,6 +11,7 @@ Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
       name: json['name'] as String,
       representative: json['representative'] as String,
       website: json['website'] as String,
+      likes: json['likes'] as int,
       area: (json['area'] as List<dynamic>).map((e) => e as String).toList(),
       domain:
           (json['domain'] as List<dynamic>).map((e) => e as String).toList(),
@@ -23,6 +24,7 @@ Organization _$OrganizationFromFirestore(QueryDocumentSnapshot<Map> doc) =>
       name: doc.data()['name'] as String,
       representative: doc.data()['representative'] as String,
       website: doc.data()['website'] as String,
+      likes: doc.data()['likes'] as int,
       area: (doc.data()['area'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -38,6 +40,7 @@ Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
       'name': instance.name,
       'representative': instance.representative,
       'website': instance.website,
+      'likes': instance.likes,
       'area': instance.area,
       'domain': instance.domain,
       'image': instance.image,

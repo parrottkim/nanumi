@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nanumi/pages/home/widgets/home_appbar.dart';
+import 'package:nanumi/pages/home/widgets/popular_organization.dart';
 import 'package:nanumi/pages/home/widgets/recent_comment.dart';
 import 'package:nanumi/widgets/inline_advertise.dart';
 import 'package:nanumi/widgets/default_appbar.dart';
@@ -26,9 +27,12 @@ class HomePage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 12.0),
             InlineAdvertise(),
+            SizedBox(height: 20.0),
+            PopularOrganization(),
             SizedBox(height: 20.0),
             RecentComment(),
           ],

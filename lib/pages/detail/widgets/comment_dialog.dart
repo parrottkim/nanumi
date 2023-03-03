@@ -21,8 +21,6 @@ class CommentDialog extends ConsumerWidget {
     final async = ref.watch(commentListProvider(organization.id));
     final notifier = ref.watch(commentListProvider(organization.id).notifier);
 
-    final totalCount = ref.watch(likeTotalCountProvider(organization.id));
-
     return Padding(
       padding: EdgeInsets.only(
           top: AppBar().preferredSize.height +
@@ -41,10 +39,10 @@ class CommentDialog extends ConsumerWidget {
           children: [
             Text(
               '의견 보기',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontSize: 18.0),
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 18.0,
+              ),
             ),
             SizedBox(height: 6.0),
             Text('근거 없는 비방, 상업적 게시글 및 욕설은 통보없이 삭제될 수 있습니다.'),
@@ -56,7 +54,7 @@ class CommentDialog extends ConsumerWidget {
                   data: (data) => data.isNotEmpty
                       ? ListView.separated(
                           controller: notifier.controller,
-                          itemCount: data.length < totalCount
+                          itemCount: data.length < notifier.totalCount
                               ? data.length + 1
                               : data.length,
                           itemBuilder: (context, index) => index != data.length

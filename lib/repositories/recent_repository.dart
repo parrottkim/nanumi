@@ -1,76 +1,76 @@
-import 'dart:async';
+// import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:nanumi/models/comment.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:nanumi/models/comment.dart';
 
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-final StreamController<List<Comment>> _streamController =
-    StreamController<List<Comment>>.broadcast();
+// final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+// final StreamController<List<Comment>> _streamController =
+//     StreamController<List<Comment>>.broadcast();
 
-class RecentRepository {
-  List<List<Comment>> _comments = [];
-  DocumentSnapshot? _lastDocument;
+// class RecentRepository {
+//   List<List<Comment>> _comments = [];
+//   DocumentSnapshot? _lastDocument;
 
-  Stream<List<Comment>> listenCommentStream() {
-    fetchRecentList();
-    return _streamController.stream;
-  }
+//   Stream<List<Comment>> listenCommentStream() {
+//     fetchRecentList();
+//     return _streamController.stream;
+//   }
 
-  void fetchRecentList([int limit = 20]) {
-    var query = _firestore
-        .collection('comments')
-        .orderBy('createdAt', descending: true)
-        .limit(limit);
-    List<Comment> results = [];
+//   void fetchRecentList([int limit = 20]) {
+//     var query = _firestore
+//         .collection('comments')
+//         .orderBy('createdAt', descending: true)
+//         .limit(limit);
+//     List<Comment> results = [];
 
-    if (_lastDocument != null) {
-      query = query.startAfterDocument(_lastDocument!);
-    }
+//     if (_lastDocument != null) {
+//       query = query.startAfterDocument(_lastDocument!);
+//     }
 
-    var currentRequestIndex = _comments.length;
+//     var currentRequestIndex = _comments.length;
 
-    query.snapshots().listen((event) {
-      if (event.docs.isNotEmpty) {
-        var comments = event.docs
-            .map((element) => Comment.fromFirestore(element))
-            .toList();
+//     query.snapshots().listen((event) {
+//       if (event.docs.isNotEmpty) {
+//         var comments = event.docs
+//             .map((element) => Comment.fromFirestore(element))
+//             .toList();
 
-        var pageExists = currentRequestIndex < _comments.length;
+//         var pageExists = currentRequestIndex < _comments.length;
 
-        if (pageExists) {
-          _comments[currentRequestIndex] = comments;
-        } else {
-          _comments.add(comments);
-        }
+//         if (pageExists) {
+//           _comments[currentRequestIndex] = comments;
+//         } else {
+//           _comments.add(comments);
+//         }
 
-        results = _comments.fold<List<Comment>>(
-            [], (initialValue, pageItems) => initialValue..addAll(pageItems));
+//         results = _comments.fold<List<Comment>>(
+//             [], (initialValue, pageItems) => initialValue..addAll(pageItems));
 
-        _streamController.add(results);
-      }
+//         _streamController.add(results);
+//       }
 
-      if (event.docs.isEmpty && event.docChanges.isNotEmpty) {
-        for (final data in event.docChanges) {
-          if (data.newIndex == -1) {
-            results.removeWhere((element) => element == data.doc.data()?['id']);
-          }
-        }
-        _streamController.add(results);
-      }
+//       if (event.docs.isEmpty && event.docChanges.isNotEmpty) {
+//         for (final data in event.docChanges) {
+//           if (data.newIndex == -1) {
+//             results.removeWhere((element) => element == data.doc.data()?['id']);
+//           }
+//         }
+//         _streamController.add(results);
+//       }
 
-      // 마지막 문서 지정
-      if (results.isNotEmpty && currentRequestIndex == _comments.length - 1) {
-        _lastDocument = event.docs.last;
-      }
-    });
-  }
+//       // 마지막 문서 지정
+//       if (results.isNotEmpty && currentRequestIndex == _comments.length - 1) {
+//         _lastDocument = event.docs.last;
+//       }
+//     });
+//   }
 
-  Future<int> commentTotalCount() async {
-    AggregateQuerySnapshot query = await _firestore
-        .collection('comments')
-        .orderBy('createdAt', descending: true)
-        .count()
-        .get();
-    return query.count;
-  }
-}
+//   Future<int> commentTotalCount() async {
+//     AggregateQuerySnapshot query = await _firestore
+//         .collection('comments')
+//         .orderBy('createdAt', descending: true)
+//         .count()
+//         .get();
+//     return query.count;
+//   }
+// }

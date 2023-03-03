@@ -4,12 +4,12 @@ import 'package:nanumi/pages/organization/controller/list_controller.dart';
 import 'package:nanumi/providers/theme_provider.dart';
 
 class OrganizationFilter extends ConsumerWidget {
-  const OrganizationFilter({super.key});
+  const OrganizationFilter({super.key, required this.length});
+
+  final int length;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final totalCount = ref.watch(organizationTotalCountProvider);
-
     final state = ref.watch(filterProvider);
     final notifier = ref.watch(filterProvider.notifier);
 
@@ -27,7 +27,10 @@ class OrganizationFilter extends ConsumerWidget {
               scrollDirection: Axis.horizontal,
               itemCount: notifier.filter.length,
               itemBuilder: (context, index) => InkWell(
-                onTap: () => notifier.value = index,
+                onTap: () async {
+                  notifier.value = index;
+                  ref.invalidate(listProvider);
+                },
                 borderRadius: BorderRadius.circular(20.0),
                 child: Ink(
                   padding:
@@ -76,7 +79,7 @@ class OrganizationFilter extends ConsumerWidget {
           // ),
           Spacer(),
           Text(
-            '전체 ${totalCount}건',
+            '전체 $length건',
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],

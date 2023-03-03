@@ -28,8 +28,11 @@ ThemeData lightTheme = ThemeData(
       fontSize: 24.0,
     ),
     titleLarge: TextStyle(
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w600,
       fontSize: 20.0,
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 16.0,
     ),
     bodySmall: TextStyle(
       fontWeight: FontWeight.w400,
@@ -97,8 +100,11 @@ ThemeData darkTheme = ThemeData(
       fontSize: 24.0,
     ),
     titleLarge: TextStyle(
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w600,
       fontSize: 20.0,
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 16.0,
     ),
     bodySmall: TextStyle(
       fontWeight: FontWeight.w400,

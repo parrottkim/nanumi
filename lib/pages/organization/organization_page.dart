@@ -9,7 +9,6 @@ import 'package:nanumi/pages/organization/widgets/organization_shimmer.dart';
 import 'package:nanumi/widgets/default_appbar.dart';
 import 'package:nanumi/widgets/default_icon_button.dart';
 import 'package:nanumi/widgets/default_progress_indicator.dart';
-import 'package:unicons/unicons.dart';
 
 class OrganizationPage extends ConsumerStatefulWidget {
   const OrganizationPage({super.key});
@@ -27,7 +26,7 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage>
   @override
   Widget build(BuildContext context) {
     final async = ref.watch(listProvider);
-    final totalCount = ref.watch(organizationTotalCountProvider);
+    final notifier = ref.watch(listProvider.notifier);
 
     return Scaffold(
       appBar: DefaultAppBar(
@@ -43,48 +42,37 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage>
           ),
         ),
       ),
-      body: RefreshIndicator(
-        onRefresh: () async => ref.watch(listProvider.notifier).refresh(),
-        child: NotificationListener<ScrollNotification>(
-          child: LayoutBuilder(
-            builder: (context, constraints) => ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight),
-              child: SingleChildScrollView(
-                child: async.when(
-                  data: (data) => Column(
-                    children: [
-                      SizedBox(height: 8.0),
-                      OrganizationFilter(),
-                      ListView.separated(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.symmetric(horizontal: 16.0),
-                        itemCount: data.length < totalCount
-                            ? data.length + 1
-                            : data.length,
-                        itemBuilder: (context, index) => index != data.length
-                            ? OrganizationListItem(
-                                organization: data[index],
-                              )
-                            : DefaultProgressIndicator(),
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: 16.0),
-                      ),
-                    ],
+      body: LayoutBuilder(
+        builder: (context, constraints) => ConstrainedBox(
+          constraints: BoxConstraints(minHeight: constraints.maxHeight),
+          child: SingleChildScrollView(
+            controller: notifier.controller,
+            child: async.when(
+              data: (data) => Column(
+                children: [
+                  SizedBox(height: 8.0),
+                  OrganizationFilter(length: data.length),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    itemCount: data.length < notifier.totalCount
+                        ? data.length + 1
+                        : data.length,
+                    itemBuilder: (context, index) => index != data.length
+                        ? OrganizationListItem(
+                            organization: data[index],
+                          )
+                        : DefaultProgressIndicator(),
+                    separatorBuilder: (context, index) =>
+                        SizedBox(height: 16.0),
                   ),
-                  error: (error, stackTrace) => OrganizationError(error: error),
-                  loading: () => OrganizationShimmer(),
-                ),
+                ],
               ),
+              error: (error, stackTrace) => OrganizationError(error: error),
+              loading: () => OrganizationShimmer(),
             ),
           ),
-          onNotification: (notification) {
-            if (notification.metrics.extentBefore ==
-                notification.metrics.maxScrollExtent) {
-              ref.watch(listProvider.notifier).fetchFirestoreData();
-            }
-            return false;
-          },
         ),
       ),
     );
