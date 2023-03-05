@@ -69,7 +69,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '241696567632',
     projectId: 'nanumi-df9e4',
     storageBucket: 'nanumi-df9e4.appspot.com',
-    iosClientId: '241696567632-o1opb538qlkt3jnof7a4q4sah3mh8rkn.apps.googleusercontent.com',
-    iosBundleId: 'com.example.nanumi',
+    iosClientId:
+        '241696567632-o1opb538qlkt3jnof7a4q4sah3mh8rkn.apps.googleusercontent.com',
+    iosBundleId: 'com.parrottkim.nanumi',
   );
 }

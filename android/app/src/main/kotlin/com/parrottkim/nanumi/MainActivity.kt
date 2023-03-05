@@ -1,4 +1,4 @@
-package com.example.nanumi
+package com.parrottkim.nanumi
 
 import io.flutter.embedding.android.FlutterActivity
 
