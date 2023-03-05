@@ -101,8 +101,8 @@ class _InlineAdvertiseState extends State<InlineAdvertise> {
               width: _adWidth,
               height: _adHeight,
               child: Shimmer.fromColors(
-                baseColor: Colors.grey.withOpacity(0.1),
-                highlightColor: Colors.grey.withOpacity(0.05),
+                baseColor: Colors.grey.withOpacity(0.2),
+                highlightColor: Colors.grey.withOpacity(0.1),
                 child: Container(
                   color: Colors.white,
                 ),

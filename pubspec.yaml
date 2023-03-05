@@ -33,6 +33,9 @@ dependencies:
   network_info_plus: ^3.0.2
   intl: ^0.18.0
   flutter_udid: ^2.0.1
+  freezed_annotation: ^2.2.0
+  carousel_slider: ^4.2.1
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +43,7 @@ dev_dependencies:
 
   flutter_lints: ^2.0.0
   build_runner: ^2.3.3
+  freezed: ^2.3.2
 
 flutter:
   uses-material-design: true

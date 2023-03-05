@@ -14,8 +14,8 @@ class CommentShimmer extends StatelessWidget {
             width: 361.0,
             height: 109.0,
             child: Shimmer.fromColors(
-              baseColor: Colors.grey.withOpacity(0.1),
-              highlightColor: Colors.grey.withOpacity(0.05),
+              baseColor: Colors.grey.withOpacity(0.2),
+              highlightColor: Colors.grey.withOpacity(0.1),
               child: Container(
                 color: Colors.white,
               ),
@@ -29,8 +29,8 @@ class CommentShimmer extends StatelessWidget {
             width: 361.0,
             height: 109.0,
             child: Shimmer.fromColors(
-              baseColor: Colors.grey.withOpacity(0.1),
-              highlightColor: Colors.grey.withOpacity(0.05),
+              baseColor: Colors.grey.withOpacity(0.2),
+              highlightColor: Colors.grey.withOpacity(0.1),
               child: Container(
                 color: Colors.white,
               ),
@@ -44,8 +44,8 @@ class CommentShimmer extends StatelessWidget {
             width: 361.0,
             height: 109.0,
             child: Shimmer.fromColors(
-              baseColor: Colors.grey.withOpacity(0.1),
-              highlightColor: Colors.grey.withOpacity(0.05),
+              baseColor: Colors.grey.withOpacity(0.2),
+              highlightColor: Colors.grey.withOpacity(0.1),
               child: Container(
                 color: Colors.white,
               ),
@@ -59,8 +59,8 @@ class CommentShimmer extends StatelessWidget {
             width: 361.0,
             height: 109.0,
             child: Shimmer.fromColors(
-              baseColor: Colors.grey.withOpacity(0.1),
-              highlightColor: Colors.grey.withOpacity(0.05),
+              baseColor: Colors.grey.withOpacity(0.2),
+              highlightColor: Colors.grey.withOpacity(0.1),
               child: Container(
                 color: Colors.white,
               ),
@@ -74,8 +74,8 @@ class CommentShimmer extends StatelessWidget {
             width: 361.0,
             height: 109.0,
             child: Shimmer.fromColors(
-              baseColor: Colors.grey.withOpacity(0.1),
-              highlightColor: Colors.grey.withOpacity(0.05),
+              baseColor: Colors.grey.withOpacity(0.2),
+              highlightColor: Colors.grey.withOpacity(0.1),
               child: Container(
                 color: Colors.white,
               ),

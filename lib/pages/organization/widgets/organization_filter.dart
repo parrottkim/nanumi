@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nanumi/pages/organization/controller/list_controller.dart';
+import 'package:nanumi/pages/organization/controller/organization_controller.dart';
 import 'package:nanumi/providers/theme_provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 class OrganizationFilter extends ConsumerWidget {
-  const OrganizationFilter({super.key, required this.length});
-
-  final int length;
+  const OrganizationFilter({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,9 +26,9 @@ class OrganizationFilter extends ConsumerWidget {
               scrollDirection: Axis.horizontal,
               itemCount: notifier.filter.length,
               itemBuilder: (context, index) => InkWell(
-                onTap: () async {
-                  notifier.value = index;
+                onTap: () {
                   ref.invalidate(listProvider);
+                  notifier.value = index;
                 },
                 borderRadius: BorderRadius.circular(20.0),
                 child: Ink(
@@ -56,32 +55,27 @@ class OrganizationFilter extends ConsumerWidget {
               separatorBuilder: (context, index) => SizedBox(width: 4.0),
             ),
           ),
-          // Container(
-          //   padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(20.0),
-          //     border: Border.all(
-          //       color: Theme.of(context).colorScheme.outline,
-          //     ),
-          //   ),
-          //   child: Text('최신순'),
-          // ),
-          // SizedBox(width: 8.0),
-          // Container(
-          //   padding: EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(20.0),
-          //     border: Border.all(
-          //       color: Theme.of(context).colorScheme.outline,
-          //     ),
-          //   ),
-          //   child: Text('좋아요 순'),
-          // ),
           Spacer(),
-          Text(
-            '전체 $length건',
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+          if (ref.watch(listProvider).value == null)
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.0),
+              child: SizedBox(
+                width: 55.0,
+                height: 17.0,
+                child: Shimmer.fromColors(
+                  baseColor: Colors.grey.withOpacity(0.2),
+                  highlightColor: Colors.grey.withOpacity(0.1),
+                  child: Container(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          if (ref.watch(listProvider).value != null)
+            Text(
+              '전체 ${ref.watch(listProvider).value!.length}건',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
         ],
       ),
     );

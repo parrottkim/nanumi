@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/pages/home/controller/home_controller.dart';
-import 'package:nanumi/pages/home/widgets/popular_organization_list_item.dart';
+import 'package:nanumi/pages/home/widgets/popular_list_item.dart';
+import 'package:nanumi/pages/home/widgets/popular_no_element.dart';
+import 'package:nanumi/pages/home/widgets/popular_shimmer.dart';
 
-class PopularOrganization extends ConsumerWidget {
-  const PopularOrganization({Key? key}) : super(key: key);
+class PopularList extends ConsumerWidget {
+  const PopularList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(popularOrganizationProvider);
+    final state = ref.watch(popularProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -37,15 +39,21 @@ class PopularOrganization extends ConsumerWidget {
         ),
         SizedBox(height: 12.0),
         state.when(
-          data: (data) => ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: data.length,
-            itemBuilder: (context, index) =>
-                PopularOrganizationListItem(item: data[index]),
-            separatorBuilder: (context, index) => SizedBox(height: 8.0),
-          ),
-          loading: () => SizedBox.shrink(),
+          data: (data) => data.isNotEmpty
+              ? SizedBox(
+                  height: 108.0,
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    itemCount: data.length,
+                    itemBuilder: (context, index) =>
+                        PopularListItem(item: data[index]),
+                    separatorBuilder: (context, index) => SizedBox(width: 8.0),
+                  ),
+                )
+              : PopularNoElement(),
+          loading: () => PopularShimmer(),
           error: (error, stackTrace) => SizedBox.shrink(),
         ),
       ],

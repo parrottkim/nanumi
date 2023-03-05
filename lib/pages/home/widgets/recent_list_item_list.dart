@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:nanumi/models/recent.dart';
+import 'package:nanumi/models/organization.dart';
+import 'package:nanumi/pages/detail/argument/detail_argument.dart';
 import 'package:nanumi/services/constants.dart';
 import 'package:unicons/unicons.dart';
 
-class RecentCommentListItem extends StatelessWidget {
-  const RecentCommentListItem({
+class RecentListItem extends StatelessWidget {
+  const RecentListItem({
     Key? key,
     required this.item,
   }) : super(key: key);
 
-  final Recent item;
+  final Organization item;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(16.0),
-      onTap: () {},
+      onTap: () => Navigator.pushNamed(
+        context,
+        '/detail',
+        arguments: DetailArgument(organization: item),
+      ),
       child: Ink(
         padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 16.0),
         decoration: BoxDecoration(
@@ -38,20 +43,20 @@ class RecentCommentListItem extends StatelessWidget {
                 Icon(UniconsLine.mobile_android, size: 20.0),
                 SizedBox(width: 4.0),
                 Text(
-                  '${item.comment.device} | ${item.comment.deviceId.substring(0, 4)}****',
+                  '${item.recentComment!.device} | ${item.recentComment!.deviceId.substring(0, 4)}****',
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.outline),
                 ),
                 Spacer(),
                 Text(
-                  getDetailDate(item.comment.createdAt),
+                  getDetailDate(item.recentComment!.createdAt),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
             ),
             SizedBox(height: 6.0),
             Text(
-              item.comment.text,
+              item.recentComment!.text,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -61,7 +66,7 @@ class RecentCommentListItem extends StatelessWidget {
               ),
             ),
             Text(
-              item.organization.name,
+              item.name,
             )
           ],
         ),

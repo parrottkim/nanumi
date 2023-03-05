@@ -1,33 +1,30 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/models/organization.dart';
 import 'package:nanumi/pages/detail/argument/detail_argument.dart';
-import 'package:nanumi/pages/detail/controller/detail_controller.dart';
 import 'package:nanumi/pages/organization/widgets/area_section.dart';
 import 'package:nanumi/pages/organization/widgets/domain_section.dart';
 import 'package:unicons/unicons.dart';
 
-class OrganizationListItem extends ConsumerWidget {
-  const OrganizationListItem({
+class PopularListItem extends StatelessWidget {
+  const PopularListItem({
     Key? key,
-    required this.organization,
+    required this.item,
   }) : super(key: key);
 
-  final Organization organization;
+  final Organization item;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(16.0),
       onTap: () => Navigator.pushNamed(
         context,
         '/detail',
-        arguments: DetailArgument(organization: organization),
+        arguments: DetailArgument(organization: item),
       ),
-      borderRadius: BorderRadius.circular(16.0),
       child: Ink(
         padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 16.0),
+        width: MediaQuery.of(context).size.width / 1.7,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
           boxShadow: [
@@ -41,20 +38,19 @@ class OrganizationListItem extends ConsumerWidget {
           color: Theme.of(context).cardColor,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Expanded(
-                  child: Text(
-                    organization.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18.0,
-                    ),
+                Text(
+                  item.name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18.0,
                   ),
                 ),
-                SizedBox(width: 10.0),
+                Spacer(),
                 Row(
                   children: [
                     Icon(
@@ -62,18 +58,20 @@ class OrganizationListItem extends ConsumerWidget {
                       size: 16.0,
                     ),
                     SizedBox(width: 4.0),
-                    Text('${organization.likes}'),
+                    Text('${item.likes}'),
                   ],
                 ),
               ],
             ),
             SizedBox(height: 6.0),
             DomainSection(
-              organization: organization,
+              organization: item,
+              isShrink: true,
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: 6.0),
             AreaSection(
-              organization: organization,
+              organization: item,
+              isShrink: true,
             ),
           ],
         ),

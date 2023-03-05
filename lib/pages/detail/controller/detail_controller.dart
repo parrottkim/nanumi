@@ -3,10 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/models/comment.dart';
 import 'package:nanumi/models/organization.dart';
+import 'package:nanumi/pages/organization/controller/organization_controller.dart';
 import 'package:nanumi/providers/device_info_provider.dart';
 import 'package:nanumi/repositories/comment_repository.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+final detailProvider =
+    StreamProvider.family<Organization, String>((ref, id) async* {
+  final list = ref.watch(listProvider).value!;
+  late Organization organization;
+
+  for (var element in list) {
+    if (element.id == id) {
+      organization = element;
+    }
+  }
+  yield organization;
+});
 
 final commentProvider =
     StateNotifierProvider<CommentNotifier, String>((ref) => CommentNotifier());
@@ -29,9 +43,14 @@ class AgreementNotifier extends StateNotifier<bool> {
 
 final addCommentProvider =
     FutureProvider.family<void, Comment>((ref, comment) async {
-  return await _firestore
+  await _firestore.collection('organizations').doc(comment.id).set({
+    'recentComment': comment.toJson(),
+  }, SetOptions(merge: true));
+  await _firestore
+      .collection('organizations')
+      .doc(comment.id)
       .collection('comments')
-      .doc('${comment.id}-${comment.deviceId}')
+      .doc(comment.deviceId)
       .set(comment.toJson());
 });
 
@@ -65,26 +84,19 @@ class CommentListNotifier extends StateNotifier<AsyncValue<List<Comment>>> {
       state = AsyncValue.data([]);
     }
 
-    var result = [];
-
     _repository.listenCommentStream(id).listen((event) async {
-      result = event;
+      state = AsyncValue.data(event);
     });
-    await Future.delayed(Duration(milliseconds: 400));
-
-    state = AsyncValue.data([
-      if (state.value != null) ...state.value!,
-      ...result,
-    ]);
 
     _isLoading = false;
   }
 
   _scrollListeners() async {
     final reachMaxExtent =
-        controller.offset >= controller.position.maxScrollExtent - 100.0 &&
-            controller.offset < controller.position.maxScrollExtent;
-    if (reachMaxExtent) {
+        controller.offset >= controller.position.maxScrollExtent - 20.0;
+    final outOfRange =
+        !controller.position.outOfRange && controller.position.pixels != 0;
+    if (reachMaxExtent && outOfRange) {
       await _fetchFirestoreData();
     }
   }
@@ -132,9 +144,11 @@ class LikedNotifier extends StateNotifier<bool> {
         .snapshots()
         .listen((event) {
       if (event.docs.isNotEmpty) {
-        state = true;
-      } else {
-        state = false;
+        for (var doc in event.docs) {
+          if (doc['id'] == info[1]) {
+            state = true;
+          }
+        }
       }
     });
   }
@@ -142,8 +156,11 @@ class LikedNotifier extends StateNotifier<bool> {
   toggleLiked(bool flag) async {
     final info = ref.watch(deviceInfoProvider);
     if (flag) {
+      state = false;
       await _firestore.collection('organizations').doc(organization.id).set(
-        {'likes': FieldValue.increment(-1)},
+        {
+          'likes': FieldValue.increment(-1),
+        },
         SetOptions(merge: true),
       );
       await _firestore
@@ -153,8 +170,11 @@ class LikedNotifier extends StateNotifier<bool> {
           .doc(info[1])
           .delete();
     } else {
+      state = true;
       await _firestore.collection('organizations').doc(organization.id).set(
-        {'likes': FieldValue.increment(1)},
+        {
+          'likes': FieldValue.increment(1),
+        },
         SetOptions(merge: true),
       );
       await _firestore

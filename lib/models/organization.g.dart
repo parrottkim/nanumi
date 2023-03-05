@@ -4,22 +4,10 @@ part of 'organization.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
-// **************************************************************************
+// **************************************************************************************************************************
 
-Organization _$OrganizationFromJson(Map<String, dynamic> json) => Organization(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      representative: json['representative'] as String,
-      website: json['website'] as String,
-      likes: json['likes'] as int,
-      area: (json['area'] as List<dynamic>).map((e) => e as String).toList(),
-      domain:
-          (json['domain'] as List<dynamic>).map((e) => e as String).toList(),
-      image: json['image'] as String?,
-    );
-
-Organization _$OrganizationFromFirestore(QueryDocumentSnapshot<Map> doc) =>
-    Organization(
+_$_Organization _$$_OrganizationFromFirestore(QueryDocumentSnapshot<Map> doc) =>
+    _$_Organization(
       id: doc.id,
       name: doc.data()['name'] as String,
       representative: doc.data()['representative'] as String,
@@ -31,10 +19,29 @@ Organization _$OrganizationFromFirestore(QueryDocumentSnapshot<Map> doc) =>
       domain: (doc.data()['domain'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      recentComment: doc.data()['recentComment'].isEmpty
+          ? null
+          : Comment.fromJson(
+              doc.data()['recentComment'] as Map<String, dynamic>),
       image: doc.data()['image'] as String?,
     );
 
-Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
+_$_Organization _$$_OrganizationFromJson(Map<String, dynamic> json) =>
+    _$_Organization(
+      id: json['id'] as String,
+      name: json['name'],
+      representative: json['representative'],
+      website: json['website'],
+      likes: json['likes'] as int,
+      area: (json['area'] as List<dynamic>).map((e) => e as String).toList(),
+      domain: json['domain'],
+      recentComment: json['recentComment'] == null
+          ? null
+          : Comment.fromJson(json['recentComment'] as Map<String, dynamic>),
+      image: json['image'] as String?,
+    );
+
+Map<String, dynamic> _$$_OrganizationToJson(_$_Organization instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

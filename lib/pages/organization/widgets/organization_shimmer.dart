@@ -19,8 +19,8 @@ class OrganizationShimmer extends StatelessWidget {
                   width: 73.0,
                   height: 31.0,
                   child: Shimmer.fromColors(
-                    baseColor: Colors.grey.withOpacity(0.1),
-                    highlightColor: Colors.grey.withOpacity(0.05),
+                    baseColor: Colors.grey.withOpacity(0.2),
+                    highlightColor: Colors.grey.withOpacity(0.1),
                     child: Container(
                       color: Colors.white,
                     ),
@@ -34,8 +34,8 @@ class OrganizationShimmer extends StatelessWidget {
                   width: 73.0,
                   height: 31.0,
                   child: Shimmer.fromColors(
-                    baseColor: Colors.grey.withOpacity(0.1),
-                    highlightColor: Colors.grey.withOpacity(0.05),
+                    baseColor: Colors.grey.withOpacity(0.2),
+                    highlightColor: Colors.grey.withOpacity(0.1),
                     child: Container(
                       color: Colors.white,
                     ),
@@ -49,8 +49,8 @@ class OrganizationShimmer extends StatelessWidget {
                   width: 64.0,
                   height: 17.0,
                   child: Shimmer.fromColors(
-                    baseColor: Colors.grey.withOpacity(0.1),
-                    highlightColor: Colors.grey.withOpacity(0.05),
+                    baseColor: Colors.grey.withOpacity(0.2),
+                    highlightColor: Colors.grey.withOpacity(0.1),
                     child: Container(
                       color: Colors.white,
                     ),
@@ -66,8 +66,8 @@ class OrganizationShimmer extends StatelessWidget {
               width: 361.0,
               height: 118.0,
               child: Shimmer.fromColors(
-                baseColor: Colors.grey.withOpacity(0.1),
-                highlightColor: Colors.grey.withOpacity(0.05),
+                baseColor: Colors.grey.withOpacity(0.2),
+                highlightColor: Colors.grey.withOpacity(0.1),
                 child: Container(
                   color: Colors.white,
                 ),
@@ -81,8 +81,8 @@ class OrganizationShimmer extends StatelessWidget {
               width: 361.0,
               height: 118.0,
               child: Shimmer.fromColors(
-                baseColor: Colors.grey.withOpacity(0.1),
-                highlightColor: Colors.grey.withOpacity(0.05),
+                baseColor: Colors.grey.withOpacity(0.2),
+                highlightColor: Colors.grey.withOpacity(0.1),
                 child: Container(
                   color: Colors.white,
                 ),
@@ -96,8 +96,8 @@ class OrganizationShimmer extends StatelessWidget {
               width: 361.0,
               height: 118.0,
               child: Shimmer.fromColors(
-                baseColor: Colors.grey.withOpacity(0.1),
-                highlightColor: Colors.grey.withOpacity(0.05),
+                baseColor: Colors.grey.withOpacity(0.2),
+                highlightColor: Colors.grey.withOpacity(0.1),
                 child: Container(
                   color: Colors.white,
                 ),
@@ -111,8 +111,8 @@ class OrganizationShimmer extends StatelessWidget {
               width: 361.0,
               height: 118.0,
               child: Shimmer.fromColors(
-                baseColor: Colors.grey.withOpacity(0.1),
-                highlightColor: Colors.grey.withOpacity(0.05),
+                baseColor: Colors.grey.withOpacity(0.2),
+                highlightColor: Colors.grey.withOpacity(0.1),
                 child: Container(
                   color: Colors.white,
                 ),

@@ -18,8 +18,9 @@ class CommentRepository {
 
   void fetchRecentList(String id, [int limit = 20]) {
     var query = _firestore
+        .collection('organizations')
+        .doc(id)
         .collection('comments')
-        .where('id', isEqualTo: id)
         .orderBy('createdAt', descending: true)
         .limit(limit);
     List<Comment> results = [];
@@ -69,7 +70,8 @@ class CommentRepository {
   Future<int> commentTotalCount(String id) async {
     AggregateQuerySnapshot query = await _firestore
         .collection('comments')
-        .where('id', isEqualTo: id)
+        .doc(id)
+        .collection('comments')
         .orderBy('createdAt', descending: true)
         .count()
         .get();

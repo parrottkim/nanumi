@@ -37,37 +37,45 @@ class ListNotifier extends StateNotifier<AsyncValue<List<Organization>>> {
     if (totalCount == 0) {
       state = AsyncValue.data([]);
     }
-
-    var result = [];
-
     _repository.listenOrganizationStream(filter).listen((event) {
-      result = event;
-    });
-    await Future.delayed(Duration(milliseconds: 400));
+      state = AsyncValue.data(event);
 
-    state = AsyncValue.data([
-      if (state.value != null) ...state.value!,
-      ...result,
-    ]);
+      print(state.value!.length);
+    });
 
     _isLoading = false;
   }
 
   _scrollListeners() async {
     final reachMaxExtent =
-        controller.offset >= controller.position.maxScrollExtent - 100.0 &&
-            controller.offset < controller.position.maxScrollExtent;
-    if (reachMaxExtent) {
+        controller.offset >= controller.position.maxScrollExtent - 20.0;
+    final outOfRange =
+        !controller.position.outOfRange && controller.position.pixels != 0;
+    if (reachMaxExtent && outOfRange) {
       await _fetchFirestoreData();
     }
   }
-
-  void requestMoreData() async => await _fetchFirestoreData();
 
   refresh() async {
     state = AsyncLoading();
     await _fetchFirestoreData();
   }
+
+  // increaseCount(Organization organization) {
+  //   state = AsyncValue.data([
+  //     for (var element in state.value!)
+  //       if (element.id == organization.id)
+  //         element.copyWith(likes: element.likes + 1),
+  //   ]);
+  // }
+
+  // decreaseCount(Organization organization) {
+  //   state = AsyncValue.data([
+  //     for (var element in state.value!)
+  //       if (element.id == organization.id)
+  //         element.copyWith(likes: element.likes - 1),
+  //   ]);
+  // }
 }
 
 final filterProvider =

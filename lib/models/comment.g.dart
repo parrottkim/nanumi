@@ -6,15 +6,8 @@ part of 'comment.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
-      id: json['id'] as String,
-      text: json['text'] as String,
-      device: json['device'] as String,
-      deviceId: json['deviceId'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-    );
-
-Comment _$CommentFromFirestore(QueryDocumentSnapshot<Map> doc) => Comment(
+_$_Comment _$$_CommentFromFirestore(QueryDocumentSnapshot<Map> doc) =>
+    _$_Comment(
       id: doc.data()['id'] as String,
       text: doc.data()['text'] as String,
       device: doc.data()['device'] as String,
@@ -22,7 +15,16 @@ Comment _$CommentFromFirestore(QueryDocumentSnapshot<Map> doc) => Comment(
       createdAt: doc.data()['createdAt'].toDate(),
     );
 
-Map<String, dynamic> _$CommentToJson(Comment instance) => <String, dynamic>{
+_$_Comment _$$_CommentFromJson(Map<String, dynamic> json) => _$_Comment(
+      id: json['id'] as String,
+      text: json['text'],
+      device: json['device'],
+      deviceId: json['deviceId'],
+      createdAt: json['createdAt'].toDate(),
+    );
+
+Map<String, dynamic> _$$_CommentToJson(_$_Comment instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'text': instance.text,
       'device': instance.device,

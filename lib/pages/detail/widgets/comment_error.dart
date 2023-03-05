@@ -11,7 +11,7 @@ class CommentNoElement extends StatelessWidget {
       children: [
         SizedBox(height: MediaQuery.of(context).size.height / 3),
         Icon(
-          UniconsLine.sad_dizzy,
+          UniconsLine.annoyed,
           size: 64.0,
         ),
         SizedBox(height: 16.0),

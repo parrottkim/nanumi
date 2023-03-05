@@ -5,7 +5,7 @@ import 'package:nanumi/models/organization.dart';
 import 'package:nanumi/pages/detail/controller/detail_controller.dart';
 import 'package:nanumi/pages/detail/widgets/comment_dialog.dart';
 import 'package:nanumi/pages/detail/widgets/add_comment_dialog.dart';
-import 'package:nanumi/pages/organization/controller/list_controller.dart';
+import 'package:nanumi/pages/organization/controller/organization_controller.dart';
 import 'package:nanumi/pages/organization/widgets/area_section.dart';
 import 'package:nanumi/pages/organization/widgets/domain_section.dart';
 import 'package:nanumi/providers/device_info_provider.dart';
@@ -26,6 +26,7 @@ class DetailContent extends ConsumerWidget {
     final info = ref.watch(deviceInfoProvider);
     final liked = ref.watch(likedProvider(organization));
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: MediaQuery.of(context).size.height / 3.5 + 20.0,
@@ -46,16 +47,14 @@ class DetailContent extends ConsumerWidget {
               SizedBox(width: 10.0),
               InkWell(
                 borderRadius: BorderRadius.circular(16.0),
-                onTap: () async {
-                  await ref
-                      .watch(likedProvider(organization).notifier)
-                      .toggleLiked(liked);
-                },
+                onTap: () async => await ref
+                    .watch(likedProvider(organization).notifier)
+                    .toggleLiked(liked),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                   child: Row(
                     children: [
-                      liked
+                      ref.watch(likedProvider(organization))
                           ? SvgPicture.asset(
                               'assets/icons/thumbs_up.svg',
                               width: 20.0,
@@ -66,13 +65,17 @@ class DetailContent extends ConsumerWidget {
                               size: 20.0,
                             ),
                       SizedBox(width: 4.0),
-                      Text(
-                        '${organization.likes}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16.0,
-                        ),
-                      ),
+                      ref.watch(detailProvider(organization.id)).when(
+                            data: (data) => Text(
+                              '${ref.watch(detailProvider(organization.id)).value!.likes}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            error: (error, stackTrace) => SizedBox.shrink(),
+                            loading: () => SizedBox.shrink(),
+                          ),
                     ],
                   ),
                 ),
@@ -229,21 +232,25 @@ class DetailContent extends ConsumerWidget {
                 ),
               ),
               SizedBox(height: 12.0),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    '정보 수정 요청',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
+        // Padding(
+        //   padding: EdgeInsets.symmetric(horizontal: 8.0),
+        //   child: InkWell(
+        //     borderRadius: BorderRadius.circular(8.0),
+        //     onTap: () {},
+        //     child: Padding(
+        //       padding: const EdgeInsets.all(8.0),
+        //       child: Text(
+        //         '정보 수정 요청',
+        //         style: Theme.of(context).textTheme.bodySmall?.copyWith(
+        //               fontWeight: FontWeight.w700,
+        //             ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

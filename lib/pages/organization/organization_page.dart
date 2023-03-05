@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nanumi/pages/organization/controller/list_controller.dart';
+import 'package:nanumi/pages/organization/controller/organization_controller.dart';
 import 'package:nanumi/pages/organization/widgets/organization_error.dart';
 import 'package:nanumi/pages/organization/widgets/organization_filter.dart';
 import 'package:nanumi/pages/organization/widgets/organization_list_item.dart';
 import 'package:nanumi/pages/organization/widgets/organization_shimmer.dart';
+import 'package:nanumi/providers/device_info_provider.dart';
 import 'package:nanumi/widgets/default_appbar.dart';
 import 'package:nanumi/widgets/default_icon_button.dart';
 import 'package:nanumi/widgets/default_progress_indicator.dart';
@@ -25,6 +26,7 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage>
 
   @override
   Widget build(BuildContext context) {
+    ref.watch(deviceInfoProvider);
     final async = ref.watch(listProvider);
     final notifier = ref.watch(listProvider.notifier);
 
@@ -47,12 +49,12 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage>
           constraints: BoxConstraints(minHeight: constraints.maxHeight),
           child: SingleChildScrollView(
             controller: notifier.controller,
-            child: async.when(
-              data: (data) => Column(
-                children: [
-                  SizedBox(height: 8.0),
-                  OrganizationFilter(length: data.length),
-                  ListView.separated(
+            child: Column(
+              children: [
+                SizedBox(height: 8.0),
+                OrganizationFilter(),
+                async.when(
+                  data: (data) => ListView.separated(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -67,10 +69,10 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage>
                     separatorBuilder: (context, index) =>
                         SizedBox(height: 16.0),
                   ),
-                ],
-              ),
-              error: (error, stackTrace) => OrganizationError(error: error),
-              loading: () => OrganizationShimmer(),
+                  error: (error, stackTrace) => OrganizationError(error: error),
+                  loading: () => OrganizationShimmer(),
+                ),
+              ],
             ),
           ),
         ),

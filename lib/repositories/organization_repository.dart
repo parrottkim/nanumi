@@ -46,17 +46,8 @@ class OrganizationRepository {
         results = _organizations.fold<List<Organization>>(
             [], (initialValue, pageItems) => initialValue..addAll(pageItems));
 
-        _streamController.add(organizations);
+        _streamController.add(results);
       }
-
-      // if (event.docs.isEmpty && event.docChanges.isNotEmpty) {
-      //   for (final data in event.docChanges) {
-      //     if (data.newIndex == -1) {
-      //       results.removeWhere((element) => element == data.doc.data()?['id']);
-      //     }
-      //   }
-      //   _streamController.add(results);
-      // }
 
       if (results.isNotEmpty &&
           currentRequestIndex == _organizations.length - 1) {

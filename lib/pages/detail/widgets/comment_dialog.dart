@@ -5,7 +5,7 @@ import 'package:nanumi/pages/detail/controller/detail_controller.dart';
 import 'package:nanumi/pages/detail/widgets/comment_list_item.dart';
 import 'package:nanumi/pages/detail/widgets/comment_no_element.dart';
 import 'package:nanumi/pages/detail/widgets/comment_shimmer.dart';
-import 'package:nanumi/pages/organization/controller/list_controller.dart';
+import 'package:nanumi/pages/organization/controller/organization_controller.dart';
 import 'package:nanumi/widgets/default_progress_indicator.dart';
 
 class CommentDialog extends ConsumerWidget {
