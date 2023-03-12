@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nanumi/models/organization.dart';
+import 'package:nanumi/pages/animations/bounce_animation.dart';
 import 'package:nanumi/pages/detail/controller/detail_controller.dart';
 import 'package:nanumi/pages/detail/widgets/comment_dialog.dart';
 import 'package:nanumi/pages/detail/widgets/add_comment_dialog.dart';
@@ -47,23 +48,28 @@ class DetailContent extends ConsumerWidget {
               SizedBox(width: 10.0),
               InkWell(
                 borderRadius: BorderRadius.circular(16.0),
-                onTap: () async => await ref
-                    .watch(likedProvider(organization).notifier)
-                    .toggleLiked(liked),
+                onTap: () async {
+                  ref.watch(bounceProvider.notifier).toggle();
+                  await ref
+                      .watch(likedProvider(organization).notifier)
+                      .toggleLiked(liked);
+                },
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                   child: Row(
                     children: [
-                      ref.watch(likedProvider(organization))
-                          ? SvgPicture.asset(
-                              'assets/icons/thumbs_up.svg',
-                              width: 20.0,
-                              color: Theme.of(context).colorScheme.outline,
-                            )
-                          : Icon(
-                              UniconsLine.thumbs_up,
-                              size: 20.0,
-                            ),
+                      BounceAnimation(
+                        child: ref.watch(likedProvider(organization))
+                            ? SvgPicture.asset(
+                                'assets/icons/thumbs_up.svg',
+                                width: 20.0,
+                                color: Theme.of(context).colorScheme.outline,
+                              )
+                            : Icon(
+                                UniconsLine.thumbs_up,
+                                size: 20.0,
+                              ),
+                      ),
                       SizedBox(width: 4.0),
                       ref.watch(detailProvider(organization.id)).when(
                             data: (data) => Text(
