@@ -10,17 +10,6 @@ class SearchOverlay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return OverlayBuilder(
-      child: Material(
-        color: Colors.transparent,
-        child: SafeArea(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            color: Colors.white,
-            child: TextField(),
-          ),
-        ),
-      ),
-    );
+    return OverlayBuilder();
   }
 }

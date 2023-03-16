@@ -5,11 +5,9 @@ import 'package:unicons/unicons.dart';
 class OverlayBuilder<T> extends StatefulWidget {
   const OverlayBuilder({
     Key? key,
-    required this.child,
     this.hintText = '',
   }) : super(key: key);
 
-  final Widget child;
   final String hintText;
 
   @override
@@ -68,7 +66,35 @@ class _OverlayBuilderState extends State<OverlayBuilder>
               _removeOverlay();
             },
           ),
-          widget.child,
+          Material(
+            color: Colors.transparent,
+            child: SafeArea(
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(UniconsLine.search),
+                          ),
+                        ),
+                      ),
+                      DefaultIconButton(
+                        onPressed: () {
+                          _removeOverlay();
+                        },
+                        icon: Icon(UniconsLine.multiply),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
