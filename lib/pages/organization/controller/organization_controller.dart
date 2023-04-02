@@ -11,7 +11,7 @@ final listProvider =
         (ref) => ListNotifier(ref: ref));
 
 class ListNotifier extends StateNotifier<AsyncValue<List<Organization>>> {
-  ListNotifier({required this.ref}) : super(AsyncLoading()) {
+  ListNotifier({required this.ref}) : super(AsyncValue.loading()) {
     _fetchFirestoreData();
     controller.addListener(() => _scrollListeners());
   }
@@ -23,8 +23,6 @@ class ListNotifier extends StateNotifier<AsyncValue<List<Organization>>> {
 
   bool _isLoading = false;
   int totalCount = 0;
-
-  List<Organization> updatedList = [];
 
   _fetchFirestoreData() async {
     if (_isLoading) return;

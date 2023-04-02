@@ -23,7 +23,8 @@ final detailProvider =
 });
 
 final commentProvider =
-    StateNotifierProvider<CommentNotifier, String>((ref) => CommentNotifier());
+    StateNotifierProvider.autoDispose<CommentNotifier, String>(
+        (ref) => CommentNotifier());
 
 class CommentNotifier extends StateNotifier<String> {
   CommentNotifier() : super('');
@@ -106,19 +107,6 @@ class CommentListNotifier extends StateNotifier<AsyncValue<List<Comment>>> {
     await _fetchFirestoreData();
   }
 }
-
-// final likedProvider =
-//     FutureProvider.family<bool, Organization>((ref, organization) async {
-//   final info = ref.watch(deviceInfoProvider);
-//   var snapshot = await _firestore
-//       .collection('organizations')
-//       .doc(organization.id)
-//       .collection('likes')
-//       .where(info[1])
-//       .count()
-//       .get();
-//   return snapshot.count > 0;
-// });
 
 final likedProvider =
     StateNotifierProvider.family<LikedNotifier, bool, Organization>(

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nanumi/pages/animations/search_animation.dart';
 import 'package:nanumi/pages/home/widgets/home_appbar.dart';
 import 'package:nanumi/pages/home/widgets/popular_list.dart';
 import 'package:nanumi/pages/home/widgets/recent_list.dart';
-import 'package:nanumi/pages/search/search_page.dart';
+import 'package:nanumi/pages/search_overlay/search_overlay.dart';
 import 'package:nanumi/pages/home/widgets/top_banner.dart';
 import 'package:nanumi/providers/device_info_provider.dart';
 import 'package:nanumi/widgets/inline_advertise.dart';
