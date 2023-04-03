@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -21,6 +22,8 @@ Future<void> main() async {
   await Hive.initFlutter(tmpDir.toString());
   await Hive.openBox('prefs');
 
+  await dotenv.load(fileName: 'assets/.env');
+
   runApp(
     ProviderScope(
       child: MyApp(),
@@ -35,7 +38,8 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentTheme = ref.watch(themeProvider);
     return MaterialApp(
-      title: 'nanumi',
+      debugShowCheckedModeBanner: false,
+      title: '나누미',
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: currentTheme.themeMode,

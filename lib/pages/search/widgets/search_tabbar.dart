@@ -45,7 +45,7 @@ class _SearchTabBarState extends ConsumerState<SearchTabBar> {
       indicator: UnderlineTabIndicator(
         borderSide: BorderSide(
           width: 2,
-          color: Theme.of(context).colorScheme.secondary,
+          color: Theme.of(context).colorScheme.primary,
         ),
         insets: EdgeInsets.symmetric(horizontal: 76.0),
       ),
