@@ -44,12 +44,7 @@ class AgreementNotifier extends StateNotifier<bool> {
 
 final addCommentProvider =
     FutureProvider.family<void, Comment>((ref, comment) async {
-  await _firestore.collection('organizations').doc(comment.id).set({
-    'recentComment': comment.toJson(),
-  }, SetOptions(merge: true));
   await _firestore
-      .collection('organizations')
-      .doc(comment.id)
       .collection('comments')
       .doc(comment.deviceId)
       .set(comment.toJson());

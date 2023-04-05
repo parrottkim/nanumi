@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nanumi/models/comment.dart';
 import 'package:nanumi/models/organization.dart';
+import 'package:nanumi/models/recent.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -21,19 +23,28 @@ final popularProvider = StreamProvider<List<Organization>>((ref) async* {
   }
 });
 
-final recentProvider = StreamProvider<List<Organization>>((ref) async* {
+final recentProvider = StreamProvider<List<Comment>>((ref) async* {
   var commentSnapshot = _firestore
-      .collection('organizations')
-      .orderBy('recentComment.createdAt', descending: true)
+      .collection('comments')
+      .orderBy('createdAt', descending: true)
       .limit(10)
       .snapshots();
+  await for (var comment in commentSnapshot) {
+    List<Map> list = [];
+    for (var doc in comment.docs) {
+      var organizationSnapshot = await _firestore
+          .collection('organizations')
+          .doc(doc.data()['id'])
+          .get();
 
-  await for (var element in commentSnapshot) {
-    List<Organization> list = [];
-    for (var doc in element.docs) {
-      list = [...list, Organization.fromFirestore(doc)];
+      list = [
+        ...list,
+        Recent(
+            comment: Comment.fromFirestore(doc),
+            organization: Organization.fromJson(organizationSnapshot.data()!))
+      ];
+      yield list;
     }
-    yield list;
   }
 });
 

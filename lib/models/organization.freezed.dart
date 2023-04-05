@@ -31,7 +31,6 @@ mixin _$Organization {
   int get likes => throw _privateConstructorUsedError;
   List<String> get area => throw _privateConstructorUsedError;
   dynamic get domain => throw _privateConstructorUsedError;
-  Comment? get recentComment => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,10 +53,7 @@ abstract class $OrganizationCopyWith<$Res> {
       int likes,
       List<String> area,
       dynamic domain,
-      Comment? recentComment,
       String? image});
-
-  $CommentCopyWith<$Res>? get recentComment;
 }
 
 /// @nodoc
@@ -80,7 +76,6 @@ class _$OrganizationCopyWithImpl<$Res, $Val extends Organization>
     Object? likes = null,
     Object? area = null,
     Object? domain = freezed,
-    Object? recentComment = freezed,
     Object? image = freezed,
   }) {
     return _then(_value.copyWith(
@@ -112,27 +107,11 @@ class _$OrganizationCopyWithImpl<$Res, $Val extends Organization>
           ? _value.domain
           : domain // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      recentComment: freezed == recentComment
-          ? _value.recentComment
-          : recentComment // ignore: cast_nullable_to_non_nullable
-              as Comment?,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CommentCopyWith<$Res>? get recentComment {
-    if (_value.recentComment == null) {
-      return null;
-    }
-
-    return $CommentCopyWith<$Res>(_value.recentComment!, (value) {
-      return _then(_value.copyWith(recentComment: value) as $Val);
-    });
   }
 }
 
@@ -152,11 +131,7 @@ abstract class _$$_OrganizationCopyWith<$Res>
       int likes,
       List<String> area,
       dynamic domain,
-      Comment? recentComment,
       String? image});
-
-  @override
-  $CommentCopyWith<$Res>? get recentComment;
 }
 
 /// @nodoc
@@ -177,7 +152,6 @@ class __$$_OrganizationCopyWithImpl<$Res>
     Object? likes = null,
     Object? area = null,
     Object? domain = freezed,
-    Object? recentComment = freezed,
     Object? image = freezed,
   }) {
     return _then(_$_Organization(
@@ -198,10 +172,6 @@ class __$$_OrganizationCopyWithImpl<$Res>
           : area // ignore: cast_nullable_to_non_nullable
               as List<String>,
       domain: freezed == domain ? _value.domain! : domain,
-      recentComment: freezed == recentComment
-          ? _value.recentComment
-          : recentComment // ignore: cast_nullable_to_non_nullable
-              as Comment?,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -221,7 +191,6 @@ class _$_Organization implements _Organization {
       required this.likes,
       required final List<String> area,
       this.domain,
-      this.recentComment,
       this.image})
       : _area = area;
 
@@ -252,13 +221,12 @@ class _$_Organization implements _Organization {
   @override
   final dynamic domain;
   @override
-  final Comment? recentComment;
   @override
   final String? image;
 
   @override
   String toString() {
-    return 'Organization(id: $id, name: $name, representative: $representative, website: $website, likes: $likes, area: $area, domain: $domain, recentComment: $recentComment, image: $image)';
+    return 'Organization(id: $id, name: $name, representative: $representative, website: $website, likes: $likes, area: $area, domain: $domain, image: $image)';
   }
 
   @override
@@ -274,8 +242,6 @@ class _$_Organization implements _Organization {
             (identical(other.likes, likes) || other.likes == likes) &&
             const DeepCollectionEquality().equals(other._area, _area) &&
             const DeepCollectionEquality().equals(other.domain, domain) &&
-            (identical(other.recentComment, recentComment) ||
-                other.recentComment == recentComment) &&
             (identical(other.image, image) || other.image == image));
   }
 
@@ -290,7 +256,6 @@ class _$_Organization implements _Organization {
       likes,
       const DeepCollectionEquality().hash(_area),
       const DeepCollectionEquality().hash(domain),
-      recentComment,
       image);
 
   @JsonKey(ignore: true)
@@ -316,7 +281,6 @@ abstract class _Organization implements Organization {
       required final int likes,
       required final List<String> area,
       final dynamic domain,
-      final Comment? recentComment,
       final String? image}) = _$_Organization;
 
   factory _Organization.fromJson(Map<String, dynamic> json) =
@@ -339,8 +303,6 @@ abstract class _Organization implements Organization {
   List<String> get area;
   @override
   dynamic get domain;
-  @override
-  Comment? get recentComment;
   @override
   String? get image;
   @override

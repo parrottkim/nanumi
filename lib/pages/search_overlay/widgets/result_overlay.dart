@@ -96,7 +96,7 @@ class _ResultOverlayState extends ConsumerState<ResultOverlay>
                     SizedBox(height: 8.0),
                     if (text.isNotEmpty)
                       ResultList(
-                        result: ref.watch(domainProvider(text)),
+                        result: ref.watch(nameProvider(text)),
                       ),
                     SizedBox(height: 16.0),
                     Padding(
@@ -124,12 +124,12 @@ class _ResultOverlayState extends ConsumerState<ResultOverlay>
                       ),
                     SizedBox(
                         height: text.isNotEmpty &&
-                                (ref.watch(domainProvider(text)).isNotEmpty ||
+                                (ref.watch(nameProvider(text)).isNotEmpty ||
                                     ref.watch(areaProvider(text)).isNotEmpty)
                             ? 8.0
                             : 16.0),
                     if (text.isNotEmpty &&
-                        (ref.watch(domainProvider(text)).isNotEmpty ||
+                        (ref.watch(nameProvider(text)).isNotEmpty ||
                             ref.watch(areaProvider(text)).isNotEmpty))
                       InkWell(
                         onTap: () => Navigator.pushNamed(

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -8,6 +9,7 @@ import 'package:nanumi/models/comment.dart';
 import 'package:nanumi/models/organization.dart';
 import 'package:nanumi/pages/detail/controller/detail_controller.dart';
 import 'package:unicons/unicons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AddCommentDialog extends ConsumerStatefulWidget {
   const AddCommentDialog({
@@ -67,7 +69,7 @@ class _AddCommentDialogState extends ConsumerState<AddCommentDialog> {
                   Text(
                     '한 기기당 한 개의 의견만 남길 수 있습니다.\n중복으로 작성된 경우에는 기존 의견이 삭제됩니다.',
                   ),
-                  SizedBox(height: 6.0),
+                  SizedBox(height: 12.0),
                   Row(
                     children: [
                       Icon(UniconsLine.mobile_android, size: 20.0),
@@ -116,7 +118,27 @@ class _AddCommentDialogState extends ConsumerState<AddCommentDialog> {
                       ),
                     ),
                     SizedBox(width: 8.0),
-                    Text('모바일 고유식별번호 수집을 동의합니다'),
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '개인정보처리방침',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              decoration: TextDecoration.underline,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => launchUrl(
+                                    Uri.parse(
+                                        'https://sites.google.com/view/nanumi/%ED%99%88'),
+                                  ),
+                          ),
+                          TextSpan(
+                            text: '에 동의합니다',
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -173,7 +195,7 @@ class _AddCommentDialogState extends ConsumerState<AddCommentDialog> {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

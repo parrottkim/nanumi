@@ -19,10 +19,6 @@ _$_Organization _$$_OrganizationFromFirestore(QueryDocumentSnapshot<Map> doc) =>
       domain: (doc.data()['domain'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      recentComment: doc.data()['recentComment'].isEmpty
-          ? null
-          : Comment.fromJson(
-              doc.data()['recentComment'] as Map<String, dynamic>),
       image: doc.data()['image'] as String?,
     );
 
@@ -35,9 +31,6 @@ _$_Organization _$$_OrganizationFromJson(Map<String, dynamic> json) =>
       likes: json['likes'] as int,
       area: (json['area'] as List<dynamic>).map((e) => e as String).toList(),
       domain: json['domain'],
-      recentComment: json['recentComment'] == null
-          ? null
-          : Comment.fromJson(json['recentComment'] as Map<String, dynamic>),
       image: json['image'] as String?,
     );
 

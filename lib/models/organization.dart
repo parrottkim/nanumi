@@ -15,7 +15,6 @@ class Organization with _$Organization {
     required int likes,
     required List<String> area,
     domain,
-    Comment? recentComment,
     String? image,
   }) = _Organization;
 

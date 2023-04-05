@@ -4,12 +4,12 @@ import 'package:nanumi/models/comment.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-final commentProvider =
-    StateNotifierProvider.autoDispose<CommentNotifier, String>(
-        (ref) => CommentNotifier());
+final inquiryProvider =
+    StateNotifierProvider.autoDispose<InquiryNotifier, String>(
+        (ref) => InquiryNotifier());
 
-class CommentNotifier extends StateNotifier<String> {
-  CommentNotifier() : super('');
+class InquiryNotifier extends StateNotifier<String> {
+  InquiryNotifier() : super('');
 
   set value(String text) => state = text;
 }
@@ -26,5 +26,5 @@ class AgreementNotifier extends StateNotifier<bool> {
 
 final addCommentProvider =
     FutureProvider.family<void, Map<String, dynamic>>((ref, comment) async {
-  await _firestore.collection('comments').add(comment);
+  await _firestore.collection('inquiry').add(comment);
 });
