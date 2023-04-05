@@ -9,7 +9,7 @@ final StreamController<List<Comment>> _streamController =
 
 class CommentRepository {
   List<List<Comment>> _comments = [];
-  // DocumentSnapshot? _lastDocument;
+  DocumentSnapshot? _lastDocument;
 
   Stream<List<Comment>> listenCommentStream(String id) {
     fetchRecentList(id);
@@ -19,14 +19,15 @@ class CommentRepository {
   void fetchRecentList(String id, [int limit = 20]) {
     var query = _firestore
         .collection('comments')
-        .where('id', isEqualTo: id)
+        .where('organizationId', isEqualTo: id)
+        .where('isReported', isEqualTo: false)
         .orderBy('createdAt', descending: true)
         .limit(limit);
     List<Comment> results = [];
 
-    // if (_lastDocument != null) {
-    //   query = query.startAfterDocument(_lastDocument!);
-    // }
+    if (_lastDocument != null) {
+      query = query.startAfterDocument(_lastDocument!);
+    }
 
     var currentRequestIndex = _comments.length;
 
@@ -53,23 +54,23 @@ class CommentRepository {
       if (event.docs.isEmpty && event.docChanges.isNotEmpty) {
         for (final data in event.docChanges) {
           if (data.newIndex == -1) {
-            results.removeWhere((element) => element == data.doc.data()?['id']);
+            results.removeWhere((element) => element.id == data.doc.id);
           }
         }
         _streamController.add(results);
       }
 
-      // 마지막 문서 지정
-      // if (results.isNotEmpty && currentRequestIndex == _comments.length - 1) {
-      //   _lastDocument = event.docs.last;
-      // }
+      if (results.isNotEmpty && event.docs.isNotEmpty) {
+        _lastDocument = event.docs.last;
+      }
     });
   }
 
   Future<int> commentTotalCount(String id) async {
     AggregateQuerySnapshot query = await _firestore
         .collection('comments')
-        .where('id', isEqualTo: id)
+        .where('organizationId', isEqualTo: id)
+        .where('isReported', isEqualTo: false)
         .orderBy('createdAt', descending: true)
         .count()
         .get();

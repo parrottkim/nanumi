@@ -45,7 +45,7 @@ class CommentDialog extends ConsumerWidget {
               ),
             ),
             SizedBox(height: 6.0),
-            Text('근거 없는 비방, 상업적 게시글 및 욕설은 통보없이 삭제될 수 있습니다.'),
+            Text('부적절하거나 불쾌감을 줄 수 있는 의견은 통보없이 삭제될 수 있습니다.'),
             SizedBox(height: 12.0),
             Expanded(
               child: RefreshIndicator(

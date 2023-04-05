@@ -23,18 +23,19 @@ final popularProvider = StreamProvider<List<Organization>>((ref) async* {
   }
 });
 
-final recentProvider = StreamProvider<List<Comment>>((ref) async* {
+final recentProvider = StreamProvider<List<Recent>>((ref) async* {
   var commentSnapshot = _firestore
       .collection('comments')
-      .orderBy('createdAt', descending: true)
+      .where('isReported', isEqualTo: false)
       .limit(10)
       .snapshots();
+
   await for (var comment in commentSnapshot) {
-    List<Map> list = [];
-    for (var doc in comment.docs) {
+    List<Recent> list = [];
+    for (var doc in comment.docs.reversed) {
       var organizationSnapshot = await _firestore
           .collection('organizations')
-          .doc(doc.data()['id'])
+          .doc(doc.data()['organizationId'])
           .get();
 
       list = [

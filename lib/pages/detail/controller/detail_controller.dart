@@ -44,10 +44,7 @@ class AgreementNotifier extends StateNotifier<bool> {
 
 final addCommentProvider =
     FutureProvider.family<void, Comment>((ref, comment) async {
-  await _firestore
-      .collection('comments')
-      .doc(comment.deviceId)
-      .set(comment.toJson());
+  await _firestore.collection('comments').add(comment.toJson());
 });
 
 final commentListProvider = StateNotifierProvider.family<
@@ -170,5 +167,30 @@ class LikedNotifier extends StateNotifier<bool> {
         'createdAt': DateTime.now(),
       });
     }
+  }
+}
+
+final reportProvider =
+    ChangeNotifierProvider<ReportNotifier>((ref) => ReportNotifier());
+
+class ReportNotifier extends ChangeNotifier {
+  final List list = [
+    '잘못된 정보',
+    '영리목적/홍보성',
+    '음란성',
+    '폭력성',
+    '기타',
+  ];
+
+  reportComment(String organizationId, String commentId, int index) async {
+    await _firestore.collection('reports').add({
+      'id': organizationId,
+      'commentId': commentId,
+      'reason': list[index],
+      'reportedAt': DateTime.now(),
+    });
+    await _firestore.collection('comments').doc(commentId).set({
+      'isReported': true,
+    }, SetOptions(merge: true));
   }
 }
