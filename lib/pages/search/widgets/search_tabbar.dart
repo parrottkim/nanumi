@@ -51,9 +51,9 @@ class _SearchTabBarState extends ConsumerState<SearchTabBar> {
       ),
       tabs: [
         Tab(
-            text: ref.watch(domainProvider(widget.text)).value != null
-                ? '사업 ${ref.watch(domainProvider(widget.text).notifier).totalCount}'
-                : '사업'),
+            text: ref.watch(nameProvider(widget.text)).value != null
+                ? '단체 ${ref.watch(nameProvider(widget.text).notifier).totalCount}'
+                : '단체'),
         Tab(
             text: ref.watch(areaProvider(widget.text)).value != null
                 ? '사업국 ${ref.watch(areaProvider(widget.text).notifier).totalCount}'

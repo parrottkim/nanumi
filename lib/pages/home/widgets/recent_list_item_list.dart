@@ -50,7 +50,7 @@ class RecentListItem extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  getDetailDate(item.comment.createdAt!),
+                  getDetailDate(item.comment.createdAt),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],

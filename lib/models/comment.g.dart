@@ -34,6 +34,6 @@ Map<String, dynamic> _$$_CommentToJson(_$_Comment instance) =>
       'text': instance.text,
       'device': instance.device,
       'deviceId': instance.deviceId,
-      'createdAt': instance.createdAt?.toIso8601String(),
+      'createdAt': instance.createdAt.toIso8601String(),
       'isReported': instance.isReported,
     };
