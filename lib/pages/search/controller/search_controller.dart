@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/models/organization.dart';
-import 'package:nanumi/pages/search/widgets/area_list.dart';
-import 'package:nanumi/pages/search/widgets/domain_list.dart';
 import 'package:nanumi/repositories/area_search_repository.dart';
-import 'package:nanumi/repositories/domain_search_repository.dart';
+import 'package:nanumi/repositories/name_search_repository.dart';
 
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -80,7 +78,7 @@ class DomainNotifier extends StateNotifier<AsyncValue<List<Organization>>> {
   }
 
   final ScrollController controller = ScrollController();
-  final DomainSearchRepository _repository = DomainSearchRepository();
+  final NameSearchRepository _repository = NameSearchRepository();
 
   final Ref ref;
   final String text;

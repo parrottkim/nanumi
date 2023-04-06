@@ -7,7 +7,7 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final StreamController<List<Organization>> _streamController =
     StreamController<List<Organization>>.broadcast();
 
-class DomainSearchRepository {
+class NameSearchRepository {
   List<List<Organization>> _organizations = [];
   DocumentSnapshot? _lastDocument;
 
@@ -19,7 +19,9 @@ class DomainSearchRepository {
   void fetchOrganizationList(String text, [int limit = 10]) {
     var query = _firestore
         .collection('organizations')
-        .where('domain', arrayContains: text)
+        .where('name', isGreaterThanOrEqualTo: text)
+        .where('name', isLessThan: text + '\uf8ff')
+        .orderBy('name')
         .orderBy('likes', descending: true)
         .limit(limit);
     List<Organization> results = [];
@@ -61,7 +63,9 @@ class DomainSearchRepository {
   Future<int> organizationTotalCount(String text) async {
     AggregateQuerySnapshot query = await _firestore
         .collection('organizations')
-        .where('domain', arrayContains: text)
+        .where('name', isGreaterThanOrEqualTo: text)
+        .where('name', isLessThan: text + '\uf8ff')
+        .orderBy('name')
         .orderBy('likes', descending: true)
         .count()
         .get();

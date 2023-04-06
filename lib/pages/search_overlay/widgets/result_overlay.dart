@@ -85,7 +85,7 @@ class _ResultOverlayState extends ConsumerState<ResultOverlay>
                           ),
                           SizedBox(width: 6.0),
                           Text(
-                            '사업 조회 결과',
+                            '이름 조회 결과',
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
                             ),
