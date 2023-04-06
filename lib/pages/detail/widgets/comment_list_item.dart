@@ -47,7 +47,7 @@ class CommentListItem extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    getDetailDate(comment.createdAt!),
+                    getDetailDate(comment.createdAt),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],
