@@ -1,3 +1,4 @@
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/pages/home/widgets/home_appbar.dart';
@@ -11,11 +12,31 @@ import 'package:nanumi/widgets/default_icon_button.dart';
 import 'package:nanumi/widgets/logo.dart';
 import 'package:unicons/unicons.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerState<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    initializeAppTracking();
+  }
+
+  initializeAppTracking() async {
+    final TrackingStatus status =
+        await AppTrackingTransparency.trackingAuthorizationStatus;
+    if (status == TrackingStatus.notDetermined) {
+      await Future.delayed(const Duration(milliseconds: 200));
+      await AppTrackingTransparency.requestTrackingAuthorization();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ref.watch(deviceInfoProvider);
     return Scaffold(
       appBar: HomeAppBar(
