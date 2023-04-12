@@ -114,8 +114,8 @@ class DetailContent extends ConsumerWidget {
               ),
               SizedBox(height: 12.0),
               AreaSection(organization: organization),
-              SizedBox(height: 16.0),
-              InlineAdvertise(),
+              // SizedBox(height: 16.0),
+              // InlineAdvertise(),
               SizedBox(height: 16.0),
               if (organization.website.isNotEmpty)
                 InkWell(

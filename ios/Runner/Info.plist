@@ -264,7 +264,9 @@
 		<key>NSAppTransportSecurity</key>
 		<dict>
 		<key>NSAllowsArbitraryLoads</key>
-			<true/>
+		<true/>
+		<key>ITSAppUsesNonExemptEncryption</key>
+		<false/>
 		</dict>
 	</dict>
 </plist>
