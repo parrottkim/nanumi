@@ -14,8 +14,8 @@ class DomainList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(domainProvider(text));
-    final notifier = ref.watch(domainProvider(text).notifier);
+    final state = ref.watch(nameProvider(text));
+    final notifier = ref.watch(nameProvider(text).notifier);
 
     return state.when(
       data: (data) => data.isNotEmpty

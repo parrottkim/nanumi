@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/pages/search/controller/search_controller.dart';
 import 'package:nanumi/pages/search/widgets/area_list.dart';
-import 'package:nanumi/pages/search/widgets/domain_list.dart';
+import 'package:nanumi/pages/search/widgets/name_list.dart';
 
 class SearchTabBarView extends ConsumerWidget {
   const SearchTabBarView({

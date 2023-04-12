@@ -24,11 +24,13 @@ Comment _$CommentFromFirestore(QueryDocumentSnapshot<Map> doc) {
 
 /// @nodoc
 mixin _$Comment {
-  String get id => throw _privateConstructorUsedError;
-  dynamic get text => throw _privateConstructorUsedError;
-  dynamic get device => throw _privateConstructorUsedError;
-  dynamic get deviceId => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String get organizationId => throw _privateConstructorUsedError;
+  String get text => throw _privateConstructorUsedError;
+  String get device => throw _privateConstructorUsedError;
+  String get deviceId => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
+  bool get isReported => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,11 +43,13 @@ abstract class $CommentCopyWith<$Res> {
       _$CommentCopyWithImpl<$Res, Comment>;
   @useResult
   $Res call(
-      {String id,
-      dynamic text,
-      dynamic device,
-      dynamic deviceId,
-      DateTime createdAt});
+      {String? id,
+      String organizationId,
+      String text,
+      String device,
+      String deviceId,
+      DateTime createdAt,
+      bool isReported});
 }
 
 /// @nodoc
@@ -61,33 +65,43 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? text = freezed,
-    Object? device = freezed,
-    Object? deviceId = freezed,
+    Object? id = freezed,
+    Object? organizationId = null,
+    Object? text = null,
+    Object? device = null,
+    Object? deviceId = null,
     Object? createdAt = null,
+    Object? isReported = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      organizationId: null == organizationId
+          ? _value.organizationId
+          : organizationId // ignore: cast_nullable_to_non_nullable
               as String,
-      text: freezed == text
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      device: freezed == device
+              as String,
+      device: null == device
           ? _value.device
           : device // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      deviceId: freezed == deviceId
+              as String,
+      deviceId: null == deviceId
           ? _value.deviceId
           : deviceId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isReported: null == isReported
+          ? _value.isReported
+          : isReported // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -100,11 +114,13 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
-      dynamic text,
-      dynamic device,
-      dynamic deviceId,
-      DateTime createdAt});
+      {String? id,
+      String organizationId,
+      String text,
+      String device,
+      String deviceId,
+      DateTime createdAt,
+      bool isReported});
 }
 
 /// @nodoc
@@ -117,24 +133,43 @@ class __$$_CommentCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? text = freezed,
-    Object? device = freezed,
-    Object? deviceId = freezed,
+    Object? id = freezed,
+    Object? organizationId = null,
+    Object? text = null,
+    Object? device = null,
+    Object? deviceId = null,
     Object? createdAt = null,
+    Object? isReported = null,
   }) {
     return _then(_$_Comment(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      organizationId: null == organizationId
+          ? _value.organizationId
+          : organizationId // ignore: cast_nullable_to_non_nullable
               as String,
-      text: freezed == text ? _value.text! : text,
-      device: freezed == device ? _value.device! : device,
-      deviceId: freezed == deviceId ? _value.deviceId! : deviceId,
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      device: null == device
+          ? _value.device
+          : device // ignore: cast_nullable_to_non_nullable
+              as String,
+      deviceId: null == deviceId
+          ? _value.deviceId
+          : deviceId // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isReported: null == isReported
+          ? _value.isReported
+          : isReported // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -143,11 +178,13 @@ class __$$_CommentCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Comment implements _Comment {
   const _$_Comment(
-      {required this.id,
-      this.text,
-      this.device,
-      this.deviceId,
-      required this.createdAt});
+      {this.id,
+      required this.organizationId,
+      required this.text,
+      required this.device,
+      required this.deviceId,
+      required this.createdAt,
+      this.isReported = false});
 
   factory _$_Comment.fromJson(Map<String, dynamic> json) =>
       _$$_CommentFromJson(json);
@@ -156,19 +193,24 @@ class _$_Comment implements _Comment {
       _$$_CommentFromFirestore(doc);
 
   @override
-  final String id;
+  final String? id;
   @override
-  final dynamic text;
+  final String organizationId;
   @override
-  final dynamic device;
+  final String text;
   @override
-  final dynamic deviceId;
+  final String device;
+  @override
+  final String deviceId;
   @override
   final DateTime createdAt;
+  @override
+  @JsonKey()
+  final bool isReported;
 
   @override
   String toString() {
-    return 'Comment(id: $id, text: $text, device: $device, deviceId: $deviceId, createdAt: $createdAt)';
+    return 'Comment(id: $id, organizationId: $organizationId, text: $text, device: $device, deviceId: $deviceId, createdAt: $createdAt, isReported: $isReported)';
   }
 
   @override
@@ -177,22 +219,22 @@ class _$_Comment implements _Comment {
         (other.runtimeType == runtimeType &&
             other is _$_Comment &&
             (identical(other.id, id) || other.id == id) &&
-            const DeepCollectionEquality().equals(other.text, text) &&
-            const DeepCollectionEquality().equals(other.device, device) &&
-            const DeepCollectionEquality().equals(other.deviceId, deviceId) &&
+            (identical(other.organizationId, organizationId) ||
+                other.organizationId == organizationId) &&
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.device, device) || other.device == device) &&
+            (identical(other.deviceId, deviceId) ||
+                other.deviceId == deviceId) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.createdAt == createdAt) &&
+            (identical(other.isReported, isReported) ||
+                other.isReported == isReported));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      const DeepCollectionEquality().hash(text),
-      const DeepCollectionEquality().hash(device),
-      const DeepCollectionEquality().hash(deviceId),
-      createdAt);
+  int get hashCode => Object.hash(runtimeType, id, organizationId, text, device,
+      deviceId, createdAt, isReported);
 
   @JsonKey(ignore: true)
   @override
@@ -210,11 +252,13 @@ class _$_Comment implements _Comment {
 
 abstract class _Comment implements Comment {
   const factory _Comment(
-      {required final String id,
-      final dynamic text,
-      final dynamic device,
-      final dynamic deviceId,
-      required final DateTime createdAt}) = _$_Comment;
+      {final String? id,
+      required final String organizationId,
+      required final String text,
+      required final String device,
+      required final String deviceId,
+      required final DateTime createdAt,
+      final bool isReported}) = _$_Comment;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
 
@@ -222,15 +266,19 @@ abstract class _Comment implements Comment {
       _$_Comment.fromFirestore;
 
   @override
-  String get id;
+  String? get id;
   @override
-  dynamic get text;
+  String get organizationId;
   @override
-  dynamic get device;
+  String get text;
   @override
-  dynamic get deviceId;
+  String get device;
+  @override
+  String get deviceId;
   @override
   DateTime get createdAt;
+  @override
+  bool get isReported;
   @override
   @JsonKey(ignore: true)
   _$$_CommentCopyWith<_$_Comment> get copyWith =>

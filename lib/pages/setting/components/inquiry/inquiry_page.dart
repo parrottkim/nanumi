@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nanumi/pages/setting/components/comment/controller/comment_controller.dart';
+import 'package:nanumi/pages/setting/components/inquiry/controller/inquiry_controller.dart';
 import 'package:nanumi/providers/device_info_provider.dart';
 import 'package:nanumi/widgets/default_appbar.dart';
 import 'package:nanumi/widgets/default_icon_button.dart';
 import 'package:unicons/unicons.dart';
 
-class CommentPage extends ConsumerStatefulWidget {
-  const CommentPage({Key? key}) : super(key: key);
+class InquiryPage extends ConsumerStatefulWidget {
+  const InquiryPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<CommentPage> createState() => _CommentPageState();
+  ConsumerState<InquiryPage> createState() => _InquiryPageState();
 }
 
-class _CommentPageState extends ConsumerState<CommentPage> {
+class _InquiryPageState extends ConsumerState<InquiryPage> {
   final TextEditingController _controller = TextEditingController();
 
   @override
@@ -25,7 +25,7 @@ class _CommentPageState extends ConsumerState<CommentPage> {
   @override
   Widget build(BuildContext context) {
     final device = ref.watch(deviceInfoProvider);
-    final notifier = ref.watch(commentProvider.notifier);
+    final notifier = ref.watch(inquiryProvider.notifier);
 
     return Scaffold(
       appBar: DefaultAppBar(
@@ -112,13 +112,13 @@ class _CommentPageState extends ConsumerState<CommentPage> {
             ),
             Spacer(),
             MaterialButton(
-              onPressed: ref.watch(commentProvider).isNotEmpty &&
+              onPressed: ref.watch(inquiryProvider).isNotEmpty &&
                       ref.watch(agreementProvider)
                   ? () async {
                       var commnet = {
                         'device': device[0],
                         'deviceId': device[1],
-                        'text': ref.watch(commentProvider),
+                        'text': ref.watch(inquiryProvider),
                         'createdAt': DateTime.now()
                       };
                       await ref.watch(addCommentProvider(commnet).future);
