@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/pages/setting/components/inquiry/controller/inquiry_controller.dart';
@@ -119,7 +120,7 @@ class _InquiryPageState extends ConsumerState<InquiryPage> {
                         'device': device[0],
                         'deviceId': device[1],
                         'text': ref.watch(inquiryProvider),
-                        'createdAt': DateTime.now()
+                        'createdAt': Timestamp.fromDate(DateTime.now()),
                       };
                       await ref.watch(addCommentProvider(commnet).future);
                       Navigator.pop(context);

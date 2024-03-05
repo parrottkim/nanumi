@@ -44,6 +44,7 @@ final recentProvider = StreamProvider<List<Recent>>((ref) async* {
             comment: Comment.fromFirestore(doc),
             organization: Organization.fromJson(organizationSnapshot.data()!))
       ];
+      list.sort((a, b) => b.comment.createdAt.compareTo(a.comment.createdAt));
       yield list;
     }
   }

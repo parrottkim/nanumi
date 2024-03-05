@@ -52,16 +52,19 @@ class CommentDialog extends ConsumerWidget {
                 onRefresh: () async => notifier.refresh(),
                 child: async.when(
                   data: (data) => data.isNotEmpty
-                      ? ListView.separated(
-                          controller: notifier.controller,
-                          itemCount: data.length < notifier.totalCount
-                              ? data.length + 1
-                              : data.length,
-                          itemBuilder: (context, index) => index != data.length
-                              ? CommentListItem(comment: data[index])
-                              : DefaultProgressIndicator(),
-                          separatorBuilder: (context, index) =>
-                              SizedBox(height: 16.0),
+                      ? Material(
+                          child: ListView.separated(
+                            controller: notifier.controller,
+                            itemCount: data.length < notifier.totalCount
+                                ? data.length + 1
+                                : data.length,
+                            itemBuilder: (context, index) =>
+                                index != data.length
+                                    ? CommentListItem(comment: data[index])
+                                    : DefaultProgressIndicator(),
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: 16.0),
+                          ),
                         )
                       : CommentNoElement(),
                   error: (error, stackTrace) => SizedBox(),

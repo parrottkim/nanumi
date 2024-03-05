@@ -14,7 +14,7 @@ class CommentListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Ink(
       padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
