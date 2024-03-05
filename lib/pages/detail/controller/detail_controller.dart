@@ -11,12 +11,14 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 final detailProvider =
     StreamProvider.family<Organization, String>((ref, id) async* {
-  final list = ref.watch(listProvider).value!;
+  final list = ref.watch(listProvider).value;
   late Organization organization;
 
-  for (var element in list) {
-    if (element.id == id) {
-      organization = element;
+  if (list != null) {
+    for (var element in list) {
+      if (element.id == id) {
+        organization = element;
+      }
     }
   }
   yield organization;

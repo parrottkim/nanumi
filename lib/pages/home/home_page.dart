@@ -41,6 +41,7 @@ class HomePage extends ConsumerWidget {
             PopularList(),
             SizedBox(height: 20.0),
             RecentList(),
+            SizedBox(height: 36.0),
           ],
         ),
       ),

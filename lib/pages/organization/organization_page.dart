@@ -26,6 +26,7 @@ class _OrganizationPageState extends ConsumerState<OrganizationPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     ref.watch(deviceInfoProvider);
     final async = ref.watch(listProvider);
     final notifier = ref.watch(listProvider.notifier);

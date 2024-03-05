@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nanumi/pages/home/controller/home_controller.dart';
-import 'package:nanumi/pages/home/widgets/recent_list_item_list.dart';
+import 'package:nanumi/pages/home/widgets/recent_list_item.dart';
 import 'package:nanumi/pages/home/widgets/recent_no_element.dart';
 import 'package:nanumi/pages/home/widgets/recent_shimmer.dart';
 

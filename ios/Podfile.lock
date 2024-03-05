@@ -777,8 +777,8 @@ DEPENDENCIES:
   - flutter_udid (from `.symlinks/plugins/flutter_udid/ios`)
   - google_mobile_ads (from `.symlinks/plugins/google_mobile_ads/ios`)
   - network_info_plus (from `.symlinks/plugins/network_info_plus/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
-  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
@@ -821,9 +821,9 @@ EXTERNAL SOURCES:
   network_info_plus:
     :path: ".symlinks/plugins/network_info_plus/ios"
   path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/ios"
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_foundation:
-    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   url_launcher_ios:
@@ -863,4 +863,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 49de1e13171bd8544e90d9976c6201d201dc6261
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.14.3

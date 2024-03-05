@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
 ThemeData lightTheme = ThemeData(
+  useMaterial3: false,
   fontFamily: 'Pretendard',
   brightness: Brightness.light,
   scaffoldBackgroundColor: Color(0xFFF4F6F5),
@@ -76,6 +77,7 @@ ThemeData lightTheme = ThemeData(
 );
 
 ThemeData darkTheme = ThemeData(
+  useMaterial3: false,
   fontFamily: 'Pretendard',
   brightness: Brightness.dark,
   scaffoldBackgroundColor: Color(0xFF1D211F),
